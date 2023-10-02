@@ -1,0 +1,67 @@
+.margin-top {
+  margin-top: 60px !important;
+}
+
+/* html, body {
+  margin: 0 !important;
+  height: 100% !important;
+} */
+
+.rounded-corner {
+  border-radius: 8px;
+}
+
+.margin-x {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+
+main {
+  display: flex;
+  width: 100%;
+  margin: 60px 0 15px 0;
+  box-sizing: border-box;
+}
+
+#my-events {
+  width: 20%;
+  background-color: grey;
+  padding: 15px 8px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin: 0 5px 0 10px;
+}
+
+#events-container {
+  width: 80%;
+  background-color: green;
+  padding: 15px 8px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin: 0 10px 0 5px;
+}
+
+.margin-y {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.width-6 {
+  width: 45%;
+}
+
+.events {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  justify-content: space-evenly;
+  
+
+}
+
+.event-info {
+  display: flex;
+  
+}
