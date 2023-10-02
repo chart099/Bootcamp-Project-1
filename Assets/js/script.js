@@ -48,9 +48,3 @@ const displayEvents = (events) => {
 };
 // to test code call
 // fetchEvents();
-
-
-
-
-
-
