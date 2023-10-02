@@ -1,7 +1,7 @@
 const apiKey = 'iIm9cRrzUWIOEnRZYIrJy0Adv7GdRjad';
 const apiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
 
-const artistName = '';  // Replace with the artist you're interested in
+const artistName = 'drake';  // Replace with the artist you're interested in
 
 const fetchEvents = () => {
   const url = `${apiUrl}?keyword=${artistName}&apikey=${apiKey}`;
@@ -46,6 +46,11 @@ const displayEvents = (events) => {
     eventDisplay.textContent = 'No events found for the artist.';
   }
 };
+// to test code call
+// fetchEvents();
 
-// Call the function to fetch events
-fetchEvents();
+
+
+
+
+
