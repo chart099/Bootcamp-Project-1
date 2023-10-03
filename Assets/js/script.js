@@ -53,7 +53,8 @@ const displayEvents = (events) => {
       eventDate.textContent = `Date: ${event.dates.start.localDate}`;
 
       const saveEvent = document.createElement("button");
-      saveEvent.textContent= "Save Event";
+      // saveEvent.setAttribute("id", "favorites-star");
+      saveEvent.innerHTML = '<img id="favorites-star" src="./Assets/images/black-star-emoji-512x488-tgxkocti.png"></img>';
       
 
       eventInfo.appendChild(eventTitle);
@@ -63,7 +64,10 @@ const displayEvents = (events) => {
       eventCard.appendChild(eventImage);
       eventCard.appendChild(eventInfo);
 
+      eventCard.appendChild(saveEvent);
+
       eventsContainer.appendChild(eventCard);
+
     }
   } else {
     const noEventsMessage = document.createElement('div');
@@ -111,7 +115,7 @@ document.querySelector('#search-btn').addEventListener('click', function () {
 
 
 
-  document.getElementById().addEventListener("click", function () {
-      document.getElementById("events")
-  })
+  // document.getElementById().addEventListener("click", function () {
+  //     document.getElementById("events")
+  // })
   
