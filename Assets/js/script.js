@@ -52,6 +52,10 @@ const displayEvents = (events) => {
       const eventDate = document.createElement('p');
       eventDate.textContent = `Date: ${event.dates.start.localDate}`;
 
+      const saveEvent = document.createElement("button");
+      saveEvent.textContent= "Save Event";
+      
+
       eventInfo.appendChild(eventTitle);
       eventInfo.appendChild(eventLocation);
       eventInfo.appendChild(eventDate);
@@ -94,7 +98,7 @@ document.querySelector('#search-btn').addEventListener('click', function () {
         return response.json();
       })
       .then(data => {
-        console.log('Hotel API Response:', data);
+        console.log('Hotel API Response:', data.US);
         // Process and display hotel data as needed
       })
       .catch(error => {
@@ -104,4 +108,10 @@ document.querySelector('#search-btn').addEventListener('click', function () {
   
   // Call the function to fetch hotel data
   fetchHotelData();
+
+
+
+  document.getElementById().addEventListener("click", function () {
+      document.getElementById("events")
+  })
   
