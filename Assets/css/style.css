@@ -16,8 +16,6 @@
   margin-right: 10px;
 }
 
-
-
 main {
   display: flex;
   width: 100%;
@@ -47,6 +45,7 @@ main {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
 
 .width-6 {
   width: 45%;
