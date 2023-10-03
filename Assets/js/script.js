@@ -22,32 +22,49 @@ const fetchEvents = () => {
 };
 
 const displayEvents = (events) => {
-  const eventDisplay = document.getElementById('event-display');
-  eventDisplay.innerHTML = '';  // Clear previous events
- var i=0;
-  if (events) {
-    events.forEach(event => {
-        if (i<5){
-            const eventCard = document.createElement('div');
-            eventCard.classList.add('card');
+  const eventsContainer = document.getElementById('events-container');
+  eventsContainer.innerHTML = '';  // Clear previous events
 
-            const eventName = document.createElement('div');
-            eventName.classList.add('card-header');
-            eventName.textContent = event.name;
+  const numEventsToShow = 5;  // Number of events to display
 
-            const eventDate = document.createElement('div');
-            eventDate.classList.add('card-content');
-            eventDate.textContent = `Date: ${event.dates.start.localDate}`;
+  if (events && events.length > 0) {
+    // Display up to numEventsToShow events
+    for (let i = 0; i < Math.min(numEventsToShow, events.length); i++) {
+      const event = events[i];
 
-            eventCard.appendChild(eventName);
-            eventCard.appendChild(eventDate);
+      const eventCard = document.createElement('div');
+      eventCard.classList.add('my-card', 'width-6');
 
-            eventDisplay.appendChild(eventCard);
-            i++;
-        }
-    });
+      const eventImage = document.createElement('img');
+      eventImage.classList.add('event-img');
+      eventImage.src = event.images && event.images.length > 0 ? event.images[0].url : './Assets/images/hero-genre_Generic_PlaceHolder.avif';
+      eventImage.alt = '';
+
+      const eventInfo = document.createElement('section');
+      eventInfo.classList.add('event-info');
+
+      const eventTitle = document.createElement('h3');
+      eventTitle.textContent = event.name;
+
+      const eventLocation = document.createElement('p');
+      eventLocation.textContent = event._embedded?.venues[0]?.name || 'Location not specified';
+
+      const eventDate = document.createElement('p');
+      eventDate.textContent = `Date: ${event.dates.start.localDate}`;
+
+      eventInfo.appendChild(eventTitle);
+      eventInfo.appendChild(eventLocation);
+      eventInfo.appendChild(eventDate);
+
+      eventCard.appendChild(eventImage);
+      eventCard.appendChild(eventInfo);
+
+      eventsContainer.appendChild(eventCard);
+    }
   } else {
-    eventDisplay.textContent = 'No events found for the artist.';
+    const noEventsMessage = document.createElement('div');
+    noEventsMessage.textContent = 'No events found for the artist.';
+    eventsContainer.appendChild(noEventsMessage);
   }
 };
 // to test code call
