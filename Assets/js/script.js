@@ -74,3 +74,21 @@ document.querySelector('#search-btn').addEventListener('click', function () {
     artistName = userInput;
     fetchEvents();
   });
+
+
+const url = 'https://hotels4.p.rapidapi.com/v2/get-meta-data';
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '9da571635amsh34c4475a3b37960p112b17jsnd3857ae583a6',
+		'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
+	}
+};
+
+try {
+	const response = await fetch(url, options);
+	const result = await response.text();
+	console.log(result);
+} catch (error) {
+	console.error(error);
+}
