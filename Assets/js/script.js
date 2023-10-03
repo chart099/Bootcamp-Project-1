@@ -52,6 +52,11 @@ const displayEvents = (events) => {
       const eventDate = document.createElement('p');
       eventDate.textContent = `Date: ${event.dates.start.localDate}`;
 
+      const saveEvent = document.createElement("button");
+      // saveEvent.setAttribute("id", "favorites-star");
+      saveEvent.innerHTML = '<img id="favorites-star" src="./Assets/images/black-star-emoji-512x488-tgxkocti.png"></img>';
+      
+
       eventInfo.appendChild(eventTitle);
       eventInfo.appendChild(eventLocation);
       eventInfo.appendChild(eventDate);
@@ -59,7 +64,10 @@ const displayEvents = (events) => {
       eventCard.appendChild(eventImage);
       eventCard.appendChild(eventInfo);
 
+      eventCard.appendChild(saveEvent);
+
       eventsContainer.appendChild(eventCard);
+
     }
   } else {
     const noEventsMessage = document.createElement('div');
@@ -94,7 +102,7 @@ document.querySelector('#search-btn').addEventListener('click', function () {
         return response.json();
       })
       .then(data => {
-        console.log('Hotel API Response:', data);
+        console.log('Hotel API Response:', data.US);
         // Process and display hotel data as needed
       })
       .catch(error => {
@@ -104,4 +112,10 @@ document.querySelector('#search-btn').addEventListener('click', function () {
   
   // Call the function to fetch hotel data
   fetchHotelData();
+
+
+
+  // document.getElementById().addEventListener("click", function () {
+  //     document.getElementById("events")
+  // })
   
