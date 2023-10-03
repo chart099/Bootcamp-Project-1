@@ -22,7 +22,7 @@ const fetchEvents = () => {
 };
 
 const displayEvents = (events) => {
-  const eventsContainer = document.getElementById('events-container');
+  const eventsContainer = document.getElementById('events');
   eventsContainer.innerHTML = '';  // Clear previous events
 
   const numEventsToShow = 5;  // Number of events to display
