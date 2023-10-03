@@ -95,3 +95,10 @@ main {
 .align-right {
   text-align: right;
 }
+
+.card {
+background-image: url(./../images/hero-genre_Generic_PlaceHolder.avif);
+background-repeat: no-repeat;
+background-size: cover;
+background-color: #f0f0f0;
+}
