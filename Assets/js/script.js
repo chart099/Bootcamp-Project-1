@@ -1,8 +1,7 @@
 const apiKey = 'iIm9cRrzUWIOEnRZYIrJy0Adv7GdRjad';
 const apiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
-var hotel;
-var artistName = '';  // Replace with the artist you're interested in
-
+let artistName = '';  // Replace with the artist you're interested in
+var city;
 const fetchEvents = () => {
   const url = `${apiUrl}?keyword=${artistName}&apikey=${apiKey}`;
 
@@ -14,7 +13,6 @@ const fetchEvents = () => {
       return response.json();
     })
     .then(data => {
-      // Process and display the event data
       console.log('API Response:', data);
       displayEvents(data._embedded?.events);
     })
@@ -28,7 +26,6 @@ const displayEvents = (events) => {
   const numEventsToShow = 5;  // Number of events to display
 
   if (events && events.length > 0) {
-    // Display up to numEventsToShow events
     for (let i = 0; i < Math.min(numEventsToShow, events.length); i++) {
       const event = events[i];
 
@@ -49,16 +46,19 @@ const displayEvents = (events) => {
       const eventLocation = document.createElement('p');
       eventLocation.textContent = event._embedded?.venues[0]?.name || 'Location not specified';
 
-      // Updated code to get city
       const eventCity = document.createElement('p');
       eventCity.textContent = event._embedded?.venues[0]?.city?.name || 'City not specified';
+
+      // Update hotel to be the city
+      city = eventCity.textContent;
+      fetchRapidAPIResponse();
 
       const eventDate = document.createElement('p');
       eventDate.textContent = `Date: ${event.dates.start.localDate}`;
 
       eventInfo.appendChild(eventTitle);
       eventInfo.appendChild(eventLocation);
-      eventInfo.appendChild(eventCity);  // Append the city
+      eventInfo.appendChild(eventCity);
       eventInfo.appendChild(eventDate);
 
       eventCard.appendChild(eventImage);
@@ -72,68 +72,35 @@ const displayEvents = (events) => {
     eventsContainer.appendChild(noEventsMessage);
   }
 };
-// to test code call
 
 document.querySelector('#search-btn').addEventListener('click', function () {
-    var userInput = document.querySelector('#search-input').value
-    artistName = userInput;
-    fetchEvents();
-  });
+  artistName = document.querySelector('#search-input').value;
+  fetchEvents();
+});
 
-  
+const hotelapiKey = '5fed209256mshfd9f27707640df2p1856b4jsnbad75008378b';
+
+const fetchRapidAPIResponse = async () => {
+  const url = `https://hotels4.p.rapidapi.com/locations/v3/search?q=${city}&locale=en_US&langid=1033&siteid=300000003`;
+
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '5fed209256mshfd9f27707640df2p1856b4jsnbad75008378b',
+      'X-RapidAPI-Key': hotelapiKey,
       'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
     }
   };
 
-  const fetchEventCity = (eventId) => {
-    const venueUrl = `https://app.ticketmaster.com/discovery/v2/venues/${venueId}.json?apikey=${apiKey}`;
-  
-    fetch(venueUrl)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        // Extract city information from venue data
-        const city = data?.city?.name || 'City not specified';
-        console.log('City of the event:', city);
-      })
-      .catch(error => {
-        console.error('Error fetching venue data:', error);
-      });
-  };
-  
-  
-  const fetchHotelsNearEvent = () => {
-    fetch(hotel, options)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        if (response.status === 204) {
-          // No hotels found, display a message
-          console.log('No hotels found near the event.');
-          return null; // Return null to indicate no hotels found
-        }
-        return response.json();
-      })
-      .then(data => {
-        if (data) {
-          console.log('Hotels near event:', data);
-          // Process and display hotel data as needed
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching hotel data:', error.message);
-      });
-  };
-  
-  // Call the function to fetch hotels near the event
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    console.log('RapidAPI Response:', data.sr[8]);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
 
-  
+// Call the function to fetch and log the RapidAPI response
