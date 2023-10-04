@@ -74,6 +74,7 @@ const displayEvents = (events) => {
 
       eventCard.appendChild(eventImage);
       eventCard.appendChild(eventInfo);
+      eventCard.appendChild(saveEvent);
 
       eventsContainer.appendChild(eventCard);
 
@@ -111,6 +112,7 @@ const displayEvents = (events) => {
     savedEvents.push(tempEvents[$(this).attr('id').slice(-1)])
     console.log(savedEvents);
     localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
+    window.location = 'hotels.html'
   // console.log('eventToSave');
   })
 // console.log('results');
