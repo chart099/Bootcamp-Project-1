@@ -61,7 +61,7 @@ const displayEvents = (events) => {
       saveEvent.setAttribute("id", "favorites-star");
       saveEvent.innerHTML = '<img src="./Assets/images/black-star-emoji-512x488-tgxkocti.png"></img>';
       saveEvent.classList.add('save-icon')      
-
+      
       eventInfo.appendChild(eventTitle);
       eventInfo.appendChild(eventLocation);
       eventInfo.appendChild(eventCity);
@@ -69,6 +69,8 @@ const displayEvents = (events) => {
 
       eventCard.appendChild(eventImage);
       eventCard.appendChild(eventInfo);
+
+      eventCard.append(saveEvent);
 
       eventsContainer.appendChild(eventCard);
     }
@@ -114,6 +116,6 @@ const fetchRapidAPIResponse = async () => {
   } catch (error) {
     console.error('Error fetching data:', error);
   }
-}
+};
 
 
