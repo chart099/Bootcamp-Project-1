@@ -66,3 +66,24 @@ html {
     justify-content: space-around;
     margin-right: 10px;
   }
+
+  #hotels-card-container {
+    margin-top: 60px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding: 3px;
+    display: flex;
+    justify-content: space-around;
+}
+
+ .hotel-card {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 49%;
+    margin-bottom: 10px;
+ }
+
+ .hotel-text {
+    margin-left: 20px;
+ }
