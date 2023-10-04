@@ -36,30 +36,47 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 #my-events {
   background-color: grey;
   /* box-sizing: border-box; */
   display: flex;
+  /* flex-direction: column; */
   margin: 60px 15px 0 15px;
   border-radius: 4px;
+  padding-top: 10px;
+  padding: 10px 15px 10px 15px;
+  padding-bottom: 10px;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .event-card {
   display: flex;
-  height: 300px;
-  margin: 20px;
+  height: 200px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  width: 48%;
 }
 
 .event-img {
-  /* position: relative; */
   object-fit: cover;
   height: 100%;
   width: 100%;
   object-position: left;
-  border-radius: inherit;
+}
+
+.event-border {
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;  
+}
+
+.hotel-border {
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;  
 }
 
 .info {
@@ -70,8 +87,9 @@ body {
   top: 0;
   right: 0;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.548);
+  background-color: rgba(0, 0, 0, 0.800);
   color: white;
+  padding: 10px;
 }
 
 .event-info {
@@ -79,6 +97,13 @@ body {
   width: 50%;  
 }
 
+.name {
+  font-size: xx-large;
+}
+
+.event-card:hover {
+  opacity: 60%;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;}
 /* #favorites-star {
   height: 20px;
   position: absolute;
