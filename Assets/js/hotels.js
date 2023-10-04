@@ -97,15 +97,5 @@ const fetchRapidAPIResponse = async () => {
       'X-RapidAPI-Key': hotelapiKey,
       'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
     }
-  };
-}
-  
-
-
-
-
-  // document.getElementById().addEventListener("click", function () {
-  //     document.getElementById("events")
-  // })
-  
-
+  }
+};
