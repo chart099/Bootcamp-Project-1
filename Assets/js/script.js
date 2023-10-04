@@ -55,6 +55,16 @@ const displayEvents = (events) => {
       const eventCity = document.createElement('p');
       eventCity.textContent = event._embedded?.venues[0]?.city?.name || 'City not specified';
 
+      const seeHotels = document.createElement("button");
+      seeHotels.setAttribute("class", "see-hotels")
+      seeHotels.textContent = "See Hotels";
+      eventInfo.appendChild(seeHotels);
+
+      const buyTickets = document.createElement("button");
+      buyTickets.setAttribute("class", "buy-tickets");
+      buyTickets.textContent = "Buy Tickets";
+      eventInfo.appendChild(buyTickets);
+
       // Update hotel to be the city
       city = eventCity.textContent;
       fetchRapidAPIResponse();
@@ -115,6 +125,14 @@ const displayEvents = (events) => {
     localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
     window.location = 'hotels.html'
   // console.log('eventToSave');
+
+  $('.see-hotels').on("click", function() {
+    
+  })
+
+  $(".buy-tickets").on("click", function () {
+
+  })
   })
 // console.log('results');
 
