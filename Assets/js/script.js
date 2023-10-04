@@ -2,6 +2,7 @@ const apiKey = 'iIm9cRrzUWIOEnRZYIrJy0Adv7GdRjad';
 const apiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
 let artistName = '';  // Replace with the artist you're interested in
 var city;
+
 const fetchEvents = () => {
   const url = `${apiUrl}?keyword=${artistName}&apikey=${apiKey}`;
 
@@ -56,11 +57,6 @@ const displayEvents = (events) => {
       const eventDate = document.createElement('p');
       eventDate.textContent = `Date: ${event.dates.start.localDate}`;
 
-      const saveEvent = document.createElement("button");
-      // saveEvent.setAttribute("id", "favorites-star");
-      saveEvent.innerHTML = '<img id="favorites-star" src="./Assets/images/black-star-emoji-512x488-tgxkocti.png"></img>';
-      
-
       eventInfo.appendChild(eventTitle);
       eventInfo.appendChild(eventLocation);
       eventInfo.appendChild(eventCity);
@@ -69,10 +65,7 @@ const displayEvents = (events) => {
       eventCard.appendChild(eventImage);
       eventCard.appendChild(eventInfo);
 
-      eventCard.appendChild(saveEvent);
-
       eventsContainer.appendChild(eventCard);
-
     }
   } else {
     const noEventsMessage = document.createElement('div');
@@ -99,13 +92,14 @@ const fetchRapidAPIResponse = async () => {
     }
   };
 
-  
-
-
-
-
-  // document.getElementById().addEventListener("click", function () {
-  //     document.getElementById("events")
-  // })
-  
-
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    console.log('RapidAPI Response:', data.sr);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
