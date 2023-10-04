@@ -73,11 +73,15 @@ html {
     margin-left: 20px;
     margin-bottom: 20px;
     padding: 3px;
+    display: flex;
+    justify-content: space-around;
 }
 
  .hotel-card {
     display: flex;
     flex-wrap: nowrap;
+    width: 49%;
+    margin-bottom: 10px;
  }
 
  .hotel-text {
