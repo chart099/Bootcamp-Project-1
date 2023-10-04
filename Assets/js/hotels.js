@@ -106,20 +106,20 @@ const fetchRapidAPIResponse = async () => {
       'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
     }
   }
+
   try {
     const response = await fetch(url, options);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    console.log('RapidAPI Response:', data.sr);
+    
+    // Log hotel addresses for elements with type 'HOTEL'
     for (var i = 0; i < data.sr.length; i++) {
-      if (data.sr[i] === 'gaiaHotelResult') {
-        console.log(data.sr[i].hotelAddress);
-      } else {
-        // console.log(data.sr[i].first());
+      if (data.sr[i].type === 'HOTEL') {
+        console.log('Hotel Address:', data.sr[i].hotelAddress);
       }
-      }
+    }
   } catch (error) {
     console.error('Error fetching data:', error);
   }
