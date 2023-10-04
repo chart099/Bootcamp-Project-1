@@ -2,6 +2,14 @@ const apiKey = 'iIm9cRrzUWIOEnRZYIrJy0Adv7GdRjad';
 const apiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
 let artistName = '';  // Replace with the artist you're interested in
 var city;
+var savedEvents = JSON.parse(localStorage.getItem("savedEvents")) || [];
+console.log(savedEvents[savedEvents.length-1].eventLocation);
+console.log(savedEvents);
+city = savedEvents[savedEvents.length-1].eventLocation
+
+
+
+
 const fetchEvents = () => {
   const url = `${apiUrl}?keyword=${artistName}&apikey=${apiKey}`;
 
@@ -98,4 +106,25 @@ const fetchRapidAPIResponse = async () => {
       'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
     }
   }
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    console.log('RapidAPI Response:', data.sr);
+    for (var i = 0; i < data.sr.length; i++) {
+      if (data.sr[i] === 'gaiaHotelResult') {
+        console.log(data.sr[i].hotelAddress);
+      } else {
+        // console.log(data.sr[i].first());
+      }
+      }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
 };
+
+
+
+fetchRapidAPIResponse()
