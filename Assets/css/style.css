@@ -122,9 +122,24 @@ background-color: #f0f0f0;
   margin-right: 10px;
 }
 
- #favorites-star {
+ /* #favorites-star {
   height: 20px;
   position: absolute;
   top: 0;
   right: 0;
-} 
+} */
+
+.save-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 40px;
+  width: 40px;
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+}
+
+.save-icon:hover {
+  opacity: 50%;
+}

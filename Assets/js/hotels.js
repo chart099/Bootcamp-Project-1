@@ -2,7 +2,6 @@ const apiKey = 'iIm9cRrzUWIOEnRZYIrJy0Adv7GdRjad';
 const apiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
 let artistName = '';  // Replace with the artist you're interested in
 var city;
-
 const fetchEvents = () => {
   const url = `${apiUrl}?keyword=${artistName}&apikey=${apiKey}`;
 
@@ -58,9 +57,9 @@ const displayEvents = (events) => {
       eventDate.textContent = `Date: ${event.dates.start.localDate}`;
 
       const saveEvent = document.createElement("button");
-      saveEvent.setAttribute("id", "favorites-star");
-      saveEvent.innerHTML = '<img src="./Assets/images/black-star-emoji-512x488-tgxkocti.png"></img>';
-      saveEvent.classList.add('save-icon')      
+      // saveEvent.setAttribute("id", "favorites-star");
+      saveEvent.innerHTML = '<img id="favorites-star" src="./Assets/images/black-star-emoji-512x488-tgxkocti.png"></img>';
+      
 
       eventInfo.appendChild(eventTitle);
       eventInfo.appendChild(eventLocation);
@@ -70,21 +69,16 @@ const displayEvents = (events) => {
       eventCard.appendChild(eventImage);
       eventCard.appendChild(eventInfo);
 
+      eventCard.appendChild(saveEvent);
+
       eventsContainer.appendChild(eventCard);
+
     }
   } else {
     const noEventsMessage = document.createElement('div');
     noEventsMessage.textContent = 'No events found for the artist.';
     eventsContainer.appendChild(noEventsMessage);
   }
-
-  $('#favorites-star').on('click', function() {
-    console.log(this.innerHTML);
-    $(this).innerHTML = '<img src="./Assets/images/white-medium-star-emoji-2048x1960-v2wse4p9.png"></img>'
-  })
-
-  
-
 };
 
 document.querySelector('#search-btn').addEventListener('click', function () {
@@ -103,17 +97,5 @@ const fetchRapidAPIResponse = async () => {
       'X-RapidAPI-Key': hotelapiKey,
       'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
     }
-  };
-  try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data = await response.json();
-    console.log('RapidAPI Response:', data.sr);
-  } catch (error) {
-    console.error('Error fetching data:', error);
   }
-}
-
-
+};
