@@ -2,6 +2,7 @@ const apiKey = 'iIm9cRrzUWIOEnRZYIrJy0Adv7GdRjad';
 const apiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
 let artistName = '';  // Replace with the artist you're interested in
 var city;
+
 const fetchEvents = () => {
   const url = `${apiUrl}?keyword=${artistName}&apikey=${apiKey}`;
 
@@ -69,10 +70,7 @@ const displayEvents = (events) => {
       eventCard.appendChild(eventImage);
       eventCard.appendChild(eventInfo);
 
-      eventCard.appendChild(saveEvent);
-
       eventsContainer.appendChild(eventCard);
-
     }
   } else {
     const noEventsMessage = document.createElement('div');
@@ -106,14 +104,16 @@ const fetchRapidAPIResponse = async () => {
       'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
     }
   };
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    console.log('RapidAPI Response:', data.sr);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
 }
 
-
-
-
-
-  // document.getElementById().addEventListener("click", function () {
-  //     document.getElementById("events")
-  // })
-  
 
