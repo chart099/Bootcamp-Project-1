@@ -1,8 +1,7 @@
 const apiKey = 'iIm9cRrzUWIOEnRZYIrJy0Adv7GdRjad';
 const apiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
-
-var artistName = '';  // Replace with the artist you're interested in
-
+let artistName = '';  // Replace with the artist you're interested in
+var city;
 const fetchEvents = () => {
   const url = `${apiUrl}?keyword=${artistName}&apikey=${apiKey}`;
 
@@ -14,7 +13,6 @@ const fetchEvents = () => {
       return response.json();
     })
     .then(data => {
-      // Process and display the event data
       console.log('API Response:', data);
       displayEvents(data._embedded?.events);
     })
@@ -28,7 +26,6 @@ const displayEvents = (events) => {
   const numEventsToShow = 5;  // Number of events to display
 
   if (events && events.length > 0) {
-    // Display up to numEventsToShow events
     for (let i = 0; i < Math.min(numEventsToShow, events.length); i++) {
       const event = events[i];
 
@@ -49,17 +46,33 @@ const displayEvents = (events) => {
       const eventLocation = document.createElement('p');
       eventLocation.textContent = event._embedded?.venues[0]?.name || 'Location not specified';
 
+      const eventCity = document.createElement('p');
+      eventCity.textContent = event._embedded?.venues[0]?.city?.name || 'City not specified';
+
+      // Update hotel to be the city
+      city = eventCity.textContent;
+      fetchRapidAPIResponse();
+
       const eventDate = document.createElement('p');
       eventDate.textContent = `Date: ${event.dates.start.localDate}`;
 
+      const saveEvent = document.createElement("button");
+      // saveEvent.setAttribute("id", "favorites-star");
+      saveEvent.innerHTML = '<img id="favorites-star" src="./Assets/images/black-star-emoji-512x488-tgxkocti.png"></img>';
+      
+
       eventInfo.appendChild(eventTitle);
       eventInfo.appendChild(eventLocation);
+      eventInfo.appendChild(eventCity);
       eventInfo.appendChild(eventDate);
 
       eventCard.appendChild(eventImage);
       eventCard.appendChild(eventInfo);
 
+      eventCard.appendChild(saveEvent);
+
       eventsContainer.appendChild(eventCard);
+
     }
   } else {
     const noEventsMessage = document.createElement('div');
@@ -67,41 +80,32 @@ const displayEvents = (events) => {
     eventsContainer.appendChild(noEventsMessage);
   }
 };
-// to test code call
 
 document.querySelector('#search-btn').addEventListener('click', function () {
-    var userInput = document.querySelector('#search-input').value
-    artistName = userInput;
-    fetchEvents();
-  });
+  artistName = document.querySelector('#search-input').value;
+  fetchEvents();
+});
 
+const hotelapiKey = '5fed209256mshfd9f27707640df2p1856b4jsnbad75008378b';
 
-  const hotelapiUrl = 'https://hotels4.p.rapidapi.com/v2/get-meta-data';
+const fetchRapidAPIResponse = async () => {
+  const url = `https://hotels4.p.rapidapi.com/locations/v3/search?q=${city}&locale=en_US&langid=1033&siteid=300000003`;
+
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '5fed209256mshfd9f27707640df2p1856b4jsnbad75008378b',
+      'X-RapidAPI-Key': hotelapiKey,
       'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
     }
   };
+
   
-  const fetchHotelData = () => {
-    fetch(hotelapiUrl, options)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Hotel API Response:', data);
-        // Process and display hotel data as needed
-      })
-      .catch(error => {
-        console.error('Error fetching hotel data:', error);
-      });
-  };
+
+
+
+
+  // document.getElementById().addEventListener("click", function () {
+  //     document.getElementById("events")
+  // })
   
-  // Call the function to fetch hotel data
-  fetchHotelData();
-  
+
