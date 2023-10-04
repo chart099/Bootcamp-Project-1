@@ -2,6 +2,7 @@ const apiKey = 'iIm9cRrzUWIOEnRZYIrJy0Adv7GdRjad';
 const apiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
 let artistName = '';  // Replace with the artist you're interested in
 var city;
+var tempHotels = [];
 var savedEvents = JSON.parse(localStorage.getItem("savedEvents")) || [];
 console.log(savedEvents[savedEvents.length-1].eventLocation);
 console.log(savedEvents);
@@ -27,9 +28,9 @@ const fetchEvents = () => {
     .catch(error => console.error('Error fetching data:', error));
 };
 
-const displayEvents = (events) => {
-  const eventsContainer = document.getElementById('events');
-  eventsContainer.innerHTML = '';  // Clear previous events
+const displayHotels = () => {
+  const hotelContainer = document.getElementById('hotels-card-container');
+  hotelContainer.innerHTML = '';  // Clear previous events
 
   const numEventsToShow = 5;  // Number of events to display
 
@@ -94,7 +95,7 @@ document.querySelector('#search-btn').addEventListener('click', function () {
   fetchEvents();
 });
 
-const hotelapiKey = '5fed209256mshfd9f27707640df2p1856b4jsnbad75008378b';
+const hotelapiKey = 'd56cd525d3msh64494ca272228bdp1271a1jsn6bdf6bfcb40c';
 
 const fetchRapidAPIResponse = async () => {
   const url = `https://hotels4.p.rapidapi.com/locations/v3/search?q=${city}&locale=en_US&langid=1033&siteid=300000003`;
@@ -113,12 +114,23 @@ const fetchRapidAPIResponse = async () => {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    
+    console.log
     // Log hotel addresses for elements with type 'HOTEL'
     for (var i = 0; i < data.sr.length; i++) {
       if (data.sr[i].type === 'HOTEL') {
-        console.log('Hotel Address:', data.sr[i].hotelAddress);
+        console.log('found')
+        console.log('Hotel:', data.sr[i]);
+        // var eventToSave =
+        // {
+        //   id: i,
+        //   hotelName: data.sr[i].regionNames.fullName,
+        //   hotelIMG: '',
+        //   hotelLocation: data.sr[i].hotelAddress,
+        // }
+        // tempHotels.push(eventToSave)
+
       }
+      // displayHotels();
     }
   } catch (error) {
     console.error('Error fetching data:', error);
