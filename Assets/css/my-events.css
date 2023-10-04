@@ -1,0 +1,87 @@
+html {
+  height: 100%;
+  background-color: hsl(0, 0%, 21%);
+}
+
+body {
+  min-height: 100%;
+  min-width: 100%;
+  /* margin: 0 10px 0 20px; */
+  /* margin-right: 15px; */
+}
+
+.margin-top {
+  margin-top: 60px !important;
+}
+
+/* html, body {
+  margin: 0 !important;
+  height: 100% !important;
+} */
+
+.rounded-corner {
+  border-radius: 8px;
+}
+
+.margin-x {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.align-left {
+  text-align: left;
+}
+
+.search-bar {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-right: 10px;
+}
+
+#my-events {
+  background-color: grey;
+  /* box-sizing: border-box; */
+  display: flex;
+  margin: 60px 15px 0 15px;
+  border-radius: 4px;
+}
+
+.event-card {
+  display: flex;
+  height: 300px;
+  margin: 20px;
+}
+
+.event-img {
+  /* position: relative; */
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  object-position: left;
+  border-radius: inherit;
+}
+
+.info {
+  position: absolute;
+  /* display: flex; */
+  /* justify-content: left; */
+  width: 50%;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.548);
+  color: white;
+}
+
+.event-info {
+  position: relative;
+  width: 50%;  
+}
+
+/* #favorites-star {
+  height: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+} */
