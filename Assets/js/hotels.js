@@ -57,9 +57,9 @@ const displayEvents = (events) => {
       eventDate.textContent = `Date: ${event.dates.start.localDate}`;
 
       const saveEvent = document.createElement("button");
-      saveEvent.setAttribute("id", "favorites-star");
-      saveEvent.innerHTML = '<img src="./Assets/images/black-star-emoji-512x488-tgxkocti.png"></img>';
-      saveEvent.classList.add('save-icon')      
+      // saveEvent.setAttribute("id", "favorites-star");
+      saveEvent.innerHTML = '<img id="favorites-star" src="./Assets/images/black-star-emoji-512x488-tgxkocti.png"></img>';
+      
 
       eventInfo.appendChild(eventTitle);
       eventInfo.appendChild(eventLocation);
@@ -79,14 +79,6 @@ const displayEvents = (events) => {
     noEventsMessage.textContent = 'No events found for the artist.';
     eventsContainer.appendChild(noEventsMessage);
   }
-
-  $('#favorites-star').on('click', function() {
-    console.log(this.innerHTML);
-    $(this).innerHTML = '<img src="./Assets/images/white-medium-star-emoji-2048x1960-v2wse4p9.png"></img>'
-  })
-
-  
-
 };
 
 document.querySelector('#search-btn').addEventListener('click', function () {
@@ -105,15 +97,5 @@ const fetchRapidAPIResponse = async () => {
       'X-RapidAPI-Key': hotelapiKey,
       'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
     }
-  };
-}
-
-
-
-
-
-  // document.getElementById().addEventListener("click", function () {
-  //     document.getElementById("events")
-  // })
-  
-
+  }
+};
