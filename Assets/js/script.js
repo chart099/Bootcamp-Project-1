@@ -3,6 +3,10 @@ const apiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
 let artistName = '';  // Replace with the artist you're interested in
 var city;
 
+var tempEvents = [];
+var savedEvents = JSON.parse(localStorage.getItem("savedEvents")) || [];
+
+
 const fetchEvents = () => {
   const url = `${apiUrl}?keyword=${artistName}&apikey=${apiKey}`;
 
@@ -58,7 +62,8 @@ const displayEvents = (events) => {
       eventDate.textContent = `Date: ${event.dates.start.localDate}`;
 
       const saveEvent = document.createElement("button");
-      saveEvent.setAttribute("id", "favorites-star");
+      saveEvent.setAttribute("class", "favorites-star");
+      saveEvent.setAttribute("id", eventTitle + i);
       saveEvent.innerHTML = '<img src="./Assets/images/black-star-emoji-512x488-tgxkocti.png"></img>';
       saveEvent.classList.add('save-icon')      
 
@@ -71,6 +76,26 @@ const displayEvents = (events) => {
       eventCard.appendChild(eventInfo);
 
       eventsContainer.appendChild(eventCard);
+
+
+      // console.log(event.dates.start.localDate);
+// local storage
+
+      var eventToSave =
+        {
+          id: i,
+          eventName: event._embedded?.venues[0]?.name,
+          eventDate: event.dates.start.localDate,
+          eventLocation: event._embedded?.venues[0]?.city?.name,
+          hotelName: '',
+          hotelDates: '',
+          hotelLocation: '',
+        }
+        // console.log(eventToSave);
+        tempEvents.push(eventToSave)
+    
+
+
     }
   } else {
     const noEventsMessage = document.createElement('div');
@@ -78,13 +103,20 @@ const displayEvents = (events) => {
     eventsContainer.appendChild(noEventsMessage);
   }
 
-  $('#favorites-star').on('click', function() {
-    console.log(this.innerHTML);
-    $(this).innerHTML = '<img src="./Assets/images/white-medium-star-emoji-2048x1960-v2wse4p9.png"></img>'
+ $('.favorites-star').on('click', function() {
+    console.log($(this).attr('id').slice(-1));
+    // $(this).innerHTML = '<img src="./Assets/images/white-medium-star-emoji-2048x1960-v2wse4p9.png"></img>';
+
+
+    savedEvents.push(tempEvents[$(this).attr('id').slice(-1)])
+    console.log(savedEvents);
+    localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
+  // console.log('eventToSave');
   })
+// console.log('results');
 
   
-
+console.log(tempEvents);
 };
 
 document.querySelector('#search-btn').addEventListener('click', function () {
