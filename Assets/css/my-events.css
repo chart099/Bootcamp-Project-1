@@ -8,24 +8,18 @@
 
 html {
   height: 100%;
-  background-color: hsl(0, 0%, 21%);
+  background-color: var(--blue);
 }
 
 body {
   min-height: 100%;
   min-width: 100%;
+  background-color: var(--blue);
 }
 
-nav {
-  background-color: var(--charcoal);
-}
-.navbar {
-  background-color: var(--charcoal);
-}
 .margin-top {
   margin-top: 60px !important;
 }
-
 .rounded-corner {
   border-radius: 8px;
 }
@@ -46,8 +40,16 @@ nav {
   margin-right: 15px;
 }
 
+nav {
+  background-color: var(--charcoal);
+}
+
+.navbar {
+  background-color: var(--charcoal);
+}
+
 #my-events {
-  background-color: var(--blue);
+  background-color: var(--snow);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -87,21 +89,17 @@ nav {
 
 .info {
   position: absolute;
-  /* display: flex; */
-  /* justify-content: left; */
   width: 100%;
   top: 0;
   right: 0;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.800);
+  background-color: rgba(0, 0, 0, 0.600);
   color: white;
   padding: 10px;
 }
 
 .hotel-info {
   position: absolute;
-  /* display: flex; */
-  /* justify-content: left; */
   width: 100%;
   top: 0;
   right: 0;
@@ -120,14 +118,10 @@ nav {
   font-size: xx-large;
 }
 
-.navbar-burger {
-  color: white; 
-}
-
 .event-card:hover {
   opacity: 60%;
-
-  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;}
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
 
 #search-btn:hover {
   opacity: 65%;
@@ -140,10 +134,9 @@ nav {
 
 .hotel-button {
   position: absolute;
-  bottom: 15px;
+  bottom: 5px;
   right: 15px;
-  color: white; 
-  background-color: var(--red);
+  background-color: white;
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
