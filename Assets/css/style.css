@@ -33,13 +33,18 @@ main {
   box-sizing: border-box;
 }
 
-#my-events {
+#favorite-events {
   width: 20%;
   background-color: grey;
   padding: 15px 8px;
   box-sizing: border-box;
   border-radius: 4px;
   margin: 0 5px 0 10px;
+}
+
+#my-events {
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 #events-container {
