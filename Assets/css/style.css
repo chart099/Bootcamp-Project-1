@@ -223,5 +223,8 @@ height: 200px;
   #favorite-events {
     display: none;
   }
-  
+  .my-card {
+    /* display: flex;
+    flex-direction: column; */
+  }
 }
