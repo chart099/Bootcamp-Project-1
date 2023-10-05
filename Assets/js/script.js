@@ -120,22 +120,14 @@ const displayEvents = (events) => {
     console.log($(this).attr('id').slice(-1));
     $(this).innerHTML = '<img src="./Assets/images/white-medium-star-emoji-2048x1960-v2wse4p9.png"></img>';
 
-
     savedEvents.push(tempEvents[$(this).attr('id').slice(-1)])
     console.log(savedEvents);
     localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
     displayEvents()
   })
 
-    //     window.location = 'hotels.html'
-
-    //     window.location = 'hotels.html'
-
     console.log('eventToSave');
     displayMyEvents()
-
-
-    // console.log('eventToSave');
 
   $('.see-hotels').on("click", function() {
     city = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)].eventLocation;
@@ -145,6 +137,7 @@ const displayEvents = (events) => {
     eventsContainer.innerHTML = '';  // Clear previous events
     fetchRapidAPIResponse()
     eventsContainer.innerHTML = '<img src="Assets/images/loading-gif.gif" class="loading"></img>'
+
   })
 
   $(".buy-tickets").on("click", function () {
