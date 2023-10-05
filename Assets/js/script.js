@@ -2,8 +2,9 @@ const apiKey = 'iIm9cRrzUWIOEnRZYIrJy0Adv7GdRjad';
 const apiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
 let artistName = '';  // Replace with the artist you're interested in
 var city;
-
+var eventInterested;
 var tempEvents = [];
+var tempHotels = [];
 var savedEvents = JSON.parse(localStorage.getItem("savedEvents")) || [];
 
 
@@ -75,8 +76,8 @@ const displayEvents = (events) => {
       eventInfo.appendChild(buyTickets);
 
       // Update hotel to be the city
-      city = eventCity.textContent;
-      fetchRapidAPIResponse();
+      // city = eventCity.textContent;
+      // fetchRapidAPIResponse();
 
       const eventDate = document.createElement('p');
       eventDate.textContent = `Date: ${event.dates.start.localDate}`;
@@ -99,8 +100,8 @@ const displayEvents = (events) => {
       eventsContainer.appendChild(eventCard);
 
 
-      // console.log(event.dates.start.localDate);
-// local storage
+      console.log(event.dates.start.localDate);
+      // local storage
 
       var eventToSave =
         {
@@ -108,11 +109,11 @@ const displayEvents = (events) => {
           eventName: event._embedded?.venues[0]?.name,
           eventDate: event.dates.start.localDate,
           eventLocation: event._embedded?.venues[0]?.city?.name,
+          eventImage: event.images[0].url,
           hotelName: '',
-          hotelDates: '',
           hotelLocation: '',
         }
-        // console.log(eventToSave);
+        console.log(eventToSave);
         tempEvents.push(eventToSave)
     
 
@@ -126,34 +127,45 @@ const displayEvents = (events) => {
 
  $('.favorites-star').on('click', function() {
     console.log($(this).attr('id').slice(-1));
-    // $(this).innerHTML = '<img src="./Assets/images/white-medium-star-emoji-2048x1960-v2wse4p9.png"></img>';
-
+    $(this).innerHTML = '<img src="./Assets/images/white-medium-star-emoji-2048x1960-v2wse4p9.png"></img>';
 
     savedEvents.push(tempEvents[$(this).attr('id').slice(-1)])
     console.log(savedEvents);
     localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
-    window.location = 'hotels.html'
-  // console.log('eventToSave');
+    displayEvents()
+  })
+
+    console.log('eventToSave');
+    displayMyEvents()
 
   // EVENT BUTTONS HERE
   $('.see-hotels').on("click", function() {
-    
+    city = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)].eventLocation;
+    // console.log($(this).parent().parent().children().eq(2).attr('id').slice(-1));
+    eventInterested = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)];
+    console.log(city);
+    eventsContainer.innerHTML = '';  // Clear previous events
+    fetchRapidAPIResponse()
+    eventsContainer.innerHTML = '<img src="Assets/images/loading-gif.gif" class="loading"></img>'
+
   })
 
   $(".buy-tickets").on("click", function () {
 
   })
-  })
-// console.log('results');
 
-  
-console.log(tempEvents);
+  console.log('results');
+  console.log(tempEvents); 
 };
 
 document.querySelector('#search-btn').addEventListener('click', function () {
   artistName = document.querySelector('#search-input').value;
   fetchEvents();
 });
+
+function openMyEvents() {
+  window.location = 'my-events.html'
+}
 
 const hotelapiKey = 'd56cd525d3msh64494ca272228bdp1271a1jsn6bdf6bfcb40c';
 
@@ -174,16 +186,134 @@ const fetchRapidAPIResponse = async () => {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    console.log
-    // Log hotel addresses for elements with type 'HOTEL'
+    document.getElementById('events').innerHTML = '';
+    $('#container-title').text('Hotels');
+    var index = 0;
+        // Log hotel addresses for elements with type 'HOTEL'
     for (var i = 0; i < data.sr.length; i++) {
       if (data.sr[i].type === 'HOTEL') {
-        console.log('found')
+        // eventsContainer.innerHTML = '';
+        // console.log('found')
         console.log('Hotel:', data.sr[i]);
+        var hotel = data.sr[i];
+
+        var hotelToSave =
+        {
+          id: index,  
+          hotelName: hotel.regionNames.primaryDisplayName,          
+          hotelLocation: hotel.hotelAddress.street + ' ' + hotel.hotelAddress.city + ', ' + hotel.hotelAddress.province,
+        }
+        console.log(hotelToSave);
+        tempHotels.push(hotelToSave)
+
+        const hotelCardDiv = $('<div>');
+        hotelCardDiv.addClass('hotel-card width-6');
+
+        const saveHotelBtn = $('<button>');
+        saveHotelBtn.addClass('save-hotel-btn');
+        saveHotelBtn.attr('id', index)
+        saveHotelBtn.text('Save to event')
+
+        const hotelNameH3 = $('<h3>');
+        hotelNameH3.text(hotel.regionNames.primaryDisplayName);
+
+        const hotelLocationP = $('<p>')
+        hotelLocationP.text(hotel.hotelAddress.street + ' ' + hotel.hotelAddress.city + ', ' + hotel.hotelAddress.province)
+
+        $('#events-container').append(hotelCardDiv)
+        hotelCardDiv.append(saveHotelBtn, hotelNameH3, hotelLocationP) 
+        index++;
+
+      } else {
+        // eventsContainer.innerHTML = 'No hotels found';
       }
     }
+    $('.save-hotel-btn').on("click", function() {
+      console.log('clicked');
+      console.log($(this).attr('id'));
+      eventInterested.hotelName = tempHotels[$(this).attr('id')].hotelName;
+      eventInterested.hotelLocation = tempHotels[$(this).attr('id')].hotelLocation;
+      // console.log(eventInterested);
+
+      savedEvents.push(eventInterested)
+      console.log(savedEvents);
+      localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
+
+      window.location = 'my-events.html';
+    })
+
   } catch (error) {
     console.error('Error fetching data:', error);
   }
+
 };
+
+}
+
+function displayMyEvents() {
+  if (savedEvents.length > 0) {
+      $('#my-events').text('');
+      for (let i = 0; i < savedEvents.length; i++) {
+      var event = savedEvents[i]
+      
+      const myEventCard = $("<div>");
+      myEventCard.addClass('card has-text-white');
+      // myEventCard.attr('id', event.eventName + event.id);
+      // myEventCard.css('background-image', 'url' + (event.eventImage))
+
+      const backgroundImg = $('<img>')
+      backgroundImg.attr('src', event.eventImage)
+      backgroundImg.attr('alt', '')
+      backgroundImg.addClass('event-img')
+
+      const myEventCardDiv = $('<div>');
+      myEventCardDiv.addClass('card-content');
+
+      const mediaDiv = $('<div>');
+      mediaDiv.addClass('media');
+
+      // const mediaLeft = $('<div>');
+      // mediaDiv.addClass('media-left');
+
+      // const myEventsFigure = $('<figure>');
+      // myEventsFigure.addClass('image is-48x48');
+
+      // const myEventsImg = $('<img>');
+      // myEventsImg.attr('src', event.eventImage);
+      // myEventsImg.attr('alt', "");
+
+      const myEventsMediaContent = $('<div>');
+      myEventsMediaContent.addClass('media-content');
+
+      const myEventsCardName = $('<p>');
+      myEventsCardName.addClass('title is-4 has-text-white');
+      myEventsCardName.text(event.eventName);
+
+      const myEventsLocation = $('<p>');
+      myEventsLocation.addClass('subtitle is-6 has-text-white');
+      myEventsLocation.text(event.eventLocation)
+
+      // const myEventsContent = $('<div>');
+      // myEventsContent.addClass('content');
+
+      const myEventTime = $('<time>');
+      myEventTime.text(event.eventDate);
+
+      $('#my-events').append(myEventCard);
+      myEventCard.append(backgroundImg, myEventCardDiv);
+      myEventCardDiv.append(mediaDiv);
+      mediaDiv.append(myEventsMediaContent);
+      myEventsMediaContent.append(myEventsCardName, myEventsLocation, myEventTime);
+      // mediaDiv.append(myEventsContent);
+      // myEventsContent.append(myEventTime);
+
+    }
+    $('.card').on('click', function() {
+      window.location = 'my-events.html'
+    })
+  }
+}
+
+displayMyEvents();
+
 

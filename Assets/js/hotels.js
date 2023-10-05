@@ -1,4 +1,4 @@
-const apiKey = 'iIm9cRrzUWIOEnRZYIrJy0Adv7GdRjad';
+const apiKey = 'd56cd525d3msh64494ca272228bdp1271a1jsn6bdf6bfcb40c';
 const apiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
 let artistName = '';  // Replace with the artist you're interested in
 var city;
@@ -28,9 +28,31 @@ const fetchEvents = () => {
     .catch(error => console.error('Error fetching data:', error));
 };
 
+const displayHotel = (events) => {
+  const eventsContainer = document.getElementById('hotel-cards-container');
+  eventsContainer.innerHTML = '';  // Clear previous events
+=======
+const fetchEvents = () => {
+  const url = `${apiUrl}?keyword=${artistName}&apikey=${apiKey}`;
+
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('API Response:', data);
+      displayEvents(data._embedded?.events);
+    })
+    .catch(error => console.error('Error fetching data:', error));
+};
+
 const displayHotels = () => {
   const hotelContainer = document.getElementById('hotels-card-container');
   hotelContainer.innerHTML = '';  // Clear previous events
+
 
   const numEventsToShow = 5;  // Number of events to display
 
