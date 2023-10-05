@@ -24,6 +24,14 @@ const fetchEvents = () => {
     .catch(error => console.error('Error fetching data:', error));
 };
 
+const openTicketmasterEventPage = (eventUrl) => {
+  if (eventUrl) {
+    window.open(eventUrl, '_blank');
+  } else {
+    console.error('Event URL is not available.');
+  }
+};
+
 const displayEvents = (events) => {
   console.log(events)
   const eventsContainer = document.getElementById('events');
@@ -63,6 +71,7 @@ const displayEvents = (events) => {
       const buyTickets = document.createElement("button");
       buyTickets.setAttribute("class", "buy-tickets");
       buyTickets.textContent = "Buy Tickets";
+      buyTickets.addEventListener("click", () => openTicketmasterEventPage(event.url));
       eventInfo.appendChild(buyTickets);
 
       // Update hotel to be the city
@@ -126,6 +135,7 @@ const displayEvents = (events) => {
     window.location = 'hotels.html'
   // console.log('eventToSave');
 
+  // EVENT BUTTONS HERE
   $('.see-hotels').on("click", function() {
     
   })
@@ -176,3 +186,4 @@ const fetchRapidAPIResponse = async () => {
     console.error('Error fetching data:', error);
   }
 };
+
