@@ -230,7 +230,7 @@ height: 200px;
 
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 800px) {
   #favorite-events {
     display: none;
   }
