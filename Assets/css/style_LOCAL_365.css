@@ -1,26 +1,21 @@
-:root {
-  --platinum: #d3d4d9;
-  --blue: #4b88a2;
-  --red: #bb0a21;
-  --charcoal: #252627;
-  --snow: #fff9fb;
-}
-
 html {
-  
+  background-color: hsl(0, 0%, 21%);
   height: 100%;
-  background-color: var(--blue);
 }
 
 body {
   min-height: 100%;
   min-width: 100%;
-  background-color: var(--blue);
 }
 
 .margin-top {
   margin-top: 60px !important;
 }
+
+/* html, body {
+  margin: 0 !important;
+  height: 100% !important;
+} */
 
 .rounded-corner {
   border-radius: 8px;
@@ -36,20 +31,11 @@ main {
   width: 100%;
   margin: 65px 0 15px 0;
   box-sizing: border-box;
- 
-}
-
-nav {
-  background-color: var(--charcoal);
-}
-
-.navbar {
-  background-color: var(--charcoal);
 }
 
 #favorite-events {
   width: 20%;
-  background-color: var(--snow);
+  background-color: grey;
   padding: 15px 8px;
   box-sizing: border-box;
   border-radius: 4px;
@@ -63,7 +49,7 @@ nav {
 
 #events-container {
   width: 80%;
-  background-color: var(--snow);
+  background-color: grey;
   padding: 10px 0;
   box-sizing: border-box;
   border-radius: 4px;
@@ -88,6 +74,8 @@ nav {
   padding-top: 10px;
   padding: 10px 15px 10px 15px;
   padding-bottom: 10px;
+  /* box-sizing: border-box; */
+  /* justify-content: space-evenly; */
 }
 
 .my-card {
@@ -101,6 +89,7 @@ nav {
 }
 
 .event-img {
+  /* position: relative; */
   object-fit: cover;
   height: 100%;
   width: 100%;
@@ -122,10 +111,6 @@ nav {
   height: auto;
 }
 
-#favorite-events {
-  background-color: var(--red);
-}
-
 .align-left {
   text-align: left;
 }
@@ -135,7 +120,9 @@ nav {
 }
 
 .card {
-
+/* background-image: url(./../images/hero-genre_Generic_PlaceHolder.avif); */
+/* background-repeat: no-repeat;
+background-size: cover; */
 background-color: #f0f0f0;
 margin-top: 10px;
 position: relative;
@@ -162,6 +149,13 @@ height: 200px;
   justify-content: space-around;
   margin-right: 15px;
 }
+
+ /* #favorites-star {
+  height: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+} */
 
 .save-icon {
   position: absolute;
@@ -198,7 +192,6 @@ height: 200px;
   background-color: rgb(78, 76, 76);
 }
 
-
 .save-hotel-btn {
   position: absolute;
   bottom: 0;
@@ -222,10 +215,6 @@ height: 200px;
   padding-left: 15px;
 }
 
-.navbar-burger {
-  color: white; 
-}
-
 @media screen and (max-width: 1024px) {
 
 }
@@ -233,5 +222,9 @@ height: 200px;
 @media screen and (max-width: 480px) {
   #favorite-events {
     display: none;
+  }
+  .my-card {
+    /* display: flex;
+    flex-direction: column; */
   }
 }

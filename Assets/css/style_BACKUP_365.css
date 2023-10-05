@@ -234,4 +234,14 @@ height: 200px;
   #favorite-events {
     display: none;
   }
+<<<<<<< HEAD
+  .my-card {
+    /* display: flex;
+    flex-direction: column; */
+  }
 }
+=======
+  
+}
+
+>>>>>>> becc999d7a083cc6f39cf3a07c8d0d80d8ae45af
