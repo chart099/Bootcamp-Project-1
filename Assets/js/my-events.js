@@ -1,4 +1,5 @@
 var savedEvents = JSON.parse(localStorage.getItem("savedEvents")) || [];
+console.log(savedEvents);
 
 function displaySavedEvents() {
   for (var i=0; i < savedEvents.length; i++) {
@@ -30,34 +31,32 @@ function displaySavedEvents() {
 
     const hotelInfoDiv = $('<div>')
     hotelInfoDiv.addClass('event-info')
-    hotelInfoDiv.text()
 
-    const hotelImg = $('<img>')
-    hotelImg.attr('src', '')
-    hotelImg.attr('alt', '')
-    hotelImg.addClass('event-img hotel-border')
+    // const hotelImg = $('<img>')
+    // hotelImg.attr('src', './Assets/images/photo-1517840901100-8179e982acb7.avif')
+    // hotelImg.attr('alt', '')
+    // hotelImg.addClass('event-img hotel-border')
 
     const hotelInfoSec = $('<section>')
-    hotelInfoSec.addClass('info hotel-border')
-    hotelInfoSec.text()
+    hotelInfoSec.addClass('hotel-info hotel-border')
 
     const hotelNameH3 = $('<h3>')
     hotelNameH3.addClass('name')
-    hotelNameH3.text()
+    hotelNameH3.text(event.hotelName)
 
-    const hotelDateP = $('<p>')
-    hotelDateP.text()
+    // const hotelDateP = $('<p>')
+    // hotelDateP.text('Location')
 
     const hotelLocationP = $('<p>')
-    hotelLocationP.text()
+    hotelLocationP.text(event.hotelLocation)
 
     $('#my-events').append(eventCardDiv)
     eventCardDiv.append(eventInfoDiv)
     eventInfoDiv.append(eventImg, eventInfoSec)
     eventInfoSec.append(eventNameH3, eventDateP, eventLocationP)
     eventCardDiv.append(hotelInfoDiv)
-    hotelInfoDiv.append(hotelImg, hotelInfoSec)
-    hotelInfoSec.append(hotelNameH3, hotelDateP, hotelLocationP)
+    hotelInfoDiv.append(hotelInfoSec)
+    hotelInfoSec.append(hotelNameH3, hotelLocationP)
   }
 }
 
@@ -89,20 +88,20 @@ function test() {
   const hotelInfoDiv = $('<div>')
   hotelInfoDiv.addClass('event-info')
 
-  const hotelImg = $('<img>')
-  hotelImg.attr('src', './Assets/images/photo-1517840901100-8179e982acb7.avif')
-  hotelImg.attr('alt', '')
-  hotelImg.addClass('event-img hotel-border')
+  // const hotelImg = $('<img>')
+  // hotelImg.attr('src', './Assets/images/photo-1517840901100-8179e982acb7.avif')
+  // hotelImg.attr('alt', '')
+  // hotelImg.addClass('event-img hotel-border')
 
   const hotelInfoSec = $('<section>')
-  hotelInfoSec.addClass('info hotel-border')
+  hotelInfoSec.addClass('hotel-info hotel-border')
 
   const hotelNameH3 = $('<h3>')
   hotelNameH3.addClass('name')
   hotelNameH3.text('Hotel')
 
-  const hotelDateP = $('<p>')
-  hotelDateP.text('Location')
+  // const hotelDateP = $('<p>')
+  // hotelDateP.text('Location')
 
   const hotelLocationP = $('<p>')
   hotelLocationP.text('Address')
@@ -112,11 +111,12 @@ function test() {
   eventInfoDiv.append(eventImg, eventInfoSec)
   eventInfoSec.append(eventNameH3, eventDateP, eventLocationP)
   eventCardDiv.append(hotelInfoDiv)
-  hotelInfoDiv.append(hotelImg, hotelInfoSec)
-  hotelInfoSec.append(hotelNameH3, hotelDateP, hotelLocationP)
+  hotelInfoDiv.append(hotelInfoSec)
+  hotelInfoSec.append(hotelNameH3, hotelLocationP)
 }
 
 function openHomePage() {
   window.location = 'index.html'
 }
 
+displaySavedEvents()

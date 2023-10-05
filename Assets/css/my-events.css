@@ -83,11 +83,24 @@ body {
   position: absolute;
   /* display: flex; */
   /* justify-content: left; */
-  width: 50%;
+  width: 100%;
   top: 0;
   right: 0;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.800);
+  color: white;
+  padding: 10px;
+}
+
+.hotel-info {
+  position: absolute;
+  /* display: flex; */
+  /* justify-content: left; */
+  width: 100%;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 1.00);
   color: white;
   padding: 10px;
 }
