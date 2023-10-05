@@ -25,6 +25,14 @@ const fetchEvents = () => {
     .catch(error => console.error('Error fetching data:', error));
 };
 
+const openTicketmasterEventPage = (eventUrl) => {
+  if (eventUrl) {
+    window.open(eventUrl, '_blank');
+  } else {
+    console.error('Event URL is not available.');
+  }
+};
+
 const displayEvents = (events) => {
   console.log(events)
   const eventsContainer = document.getElementById('events');
@@ -64,6 +72,7 @@ const displayEvents = (events) => {
       const buyTickets = document.createElement("button");
       buyTickets.setAttribute("class", "buy-tickets");
       buyTickets.textContent = "Buy Tickets";
+      buyTickets.addEventListener("click", () => openTicketmasterEventPage(event.url));
       eventInfo.appendChild(buyTickets);
       buyTickets.setAttribute('href', event.url)
       buyTickets.setAttribute('target', '_blank')
@@ -122,7 +131,6 @@ const displayEvents = (events) => {
     console.log($(this).attr('id').slice(-1));
     // $(this).innerHTML = '<img src="./Assets/images/white-medium-star-emoji-2048x1960-v2wse4p9.png"></img>';
 
-
     savedEvents.push(tempEvents[$(this).attr('id').slice(-1)])
     console.log(savedEvents);
     localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
@@ -130,18 +138,12 @@ const displayEvents = (events) => {
     $(this).css('background-color', 'rgba(255, 255, 0, 0.75)')
   })
 
-    //     window.location = 'hotels.html'
-
-    //     window.location = 'hotels.html'
-
     console.log('eventToSave');
     displayMyEvents()
 
+  // EVENT BUTTONS HERE
+  $('.see-hotels').on("click", function() {
 
-    // console.log('eventToSave');
-
-  $('.see-hotels').on("click", function(event) {
-    event.stopPropagation();
     city = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)].eventLocation;
     // console.log($(this).parent().parent().children().eq(2).attr('id').slice(-1));
     eventInterested = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)];
@@ -149,6 +151,7 @@ const displayEvents = (events) => {
     eventsContainer.innerHTML = '';  // Clear previous events
     fetchRapidAPIResponse()
     eventsContainer.innerHTML = '<img src="Assets/images/loading-gif.gif" class="loading"></img>'
+
   })
 
   $(".buy-tickets").on("click", function (event) {
@@ -251,6 +254,9 @@ const fetchRapidAPIResponse = async () => {
   } catch (error) {
     console.error('Error fetching data:', error);
   }
+
+};
+
 }
 
 function displayMyEvents() {
@@ -319,4 +325,5 @@ function displayMyEvents() {
 }
 
 displayMyEvents();
+
 
