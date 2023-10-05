@@ -8,6 +8,7 @@ var tempEvents = [];
 var tempHotels = [];
 // Retrieve saved events from localStorage or initialize as an empty array
 var savedEvents = JSON.parse(localStorage.getItem("savedEvents")) || [];
+var myEventsSearchInput = JSON.parse(localStorage.getItem("myEventsSearchInput")) || '';
 
 // Function to fetch events based on the artist/event name
 const fetchEvents = () => {
@@ -21,7 +22,6 @@ const fetchEvents = () => {
       return response.json();
     })
     .then(data => {
-      console.log('API Response:', data);
       displayEvents(data._embedded?.events);
     })
     .catch(error => console.error('Error fetching data:', error));
@@ -36,7 +36,6 @@ const openTicketmasterEventPage = (eventUrl) => {
 };
 // Function to display events on the webpage
 const displayEvents = (events) => {
-  console.log(events)
   const eventsContainer = document.getElementById('events');
   eventsContainer.innerHTML = '';  // Clear previous events
 
@@ -97,7 +96,6 @@ const displayEvents = (events) => {
       eventCard.appendChild(saveEvent);
 
       eventsContainer.appendChild(eventCard);
-      console.log(event.dates.start.localDate);
       // local storage
 
       var eventToSave =
@@ -110,7 +108,6 @@ const displayEvents = (events) => {
           hotelName: '',
           hotelLocation: '',
         }
-        console.log(eventToSave);
         tempEvents.push(eventToSave)
 
     }
@@ -123,34 +120,40 @@ const displayEvents = (events) => {
  $('.favorites-star').on('click', function() {
     console.log($(this).attr('id').slice(-1));
     $(this).innerHTML = '<img src="./Assets/images/white-medium-star-emoji-2048x1960-v2wse4p9.png"></img>';
+ $('.favorites-star').on('click', function(event) {
+    event.stopPropagation();
 
     savedEvents.push(tempEvents[$(this).attr('id').slice(-1)])
-    console.log(savedEvents);
     localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
     displayEvents()
   })
 
-    console.log('eventToSave');
     displayMyEvents()
 
   // Handling see hotels button click
   $('.see-hotels').on("click", function() {
     city = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)].eventLocation;
     eventInterested = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)];
-    console.log(city);
+    console.log(tempEvents + this + tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)]);
     eventsContainer.innerHTML = '';  // Clear previous events
     fetchRapidAPIResponse()
     eventsContainer.innerHTML = '<img src="Assets/images/loading-gif.gif" class="loading"></img>'
-
   })
-
-  console.log('results');
-  console.log(tempEvents); 
 };
 
-document.querySelector('#search-btn').addEventListener('click', function () {
+ $(".buy-tickets").on("click", function (event) {
+    event.stopPropagation()
+    var url = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)].eventTicketUrl
+    window.open( url, '_blank')
+ })
+
+document.querySelector('#search-btn').addEventListener('click', function (event) {
+  tempHotels = [];
+  tempEvents = [];
+  eventInterested = '';
+  event.stopPropagation();
   artistName = document.querySelector('#search-input').value;
-  
+  $('#events').text('');
   fetchEvents();
 });
 
@@ -183,7 +186,6 @@ const fetchRapidAPIResponse = async () => {
     for (var i = 0; i < data.sr.length; i++) {
       if (data.sr[i].type === 'HOTEL') {
 
-        console.log('Hotel:', data.sr[i]);
         var hotel = data.sr[i];
         var hotelToSave =
         {
@@ -191,7 +193,6 @@ const fetchRapidAPIResponse = async () => {
           hotelName: hotel.regionNames.primaryDisplayName,          
           hotelLocation: hotel.hotelAddress.street + ' ' + hotel.hotelAddress.city + ', ' + hotel.hotelAddress.province,
         }
-        console.log(hotelToSave);
         tempHotels.push(hotelToSave)
 
         const hotelCardDiv = $('<div>');
@@ -214,7 +215,9 @@ const fetchRapidAPIResponse = async () => {
       }
     }
     // Save Hotel Button sections
-    $('.save-hotel-btn').on("click", function() {
+    $('.save-hotel-btn').on("click", function(event) {
+    event.stopPropagation();
+
       eventInterested.hotelName = tempHotels[$(this).attr('id')].hotelName;
       eventInterested.hotelLocation = tempHotels[$(this).attr('id')].hotelLocation;
 
@@ -222,6 +225,9 @@ const fetchRapidAPIResponse = async () => {
       localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
 
       window.location = 'my-events.html';
+      tempHotels = [];
+      tempEvents = [];
+      eventInterested = '';
     })
 
   } catch (error) {
@@ -276,6 +282,21 @@ function displayMyEvents() {
   }
 }
 
+function searchMyEventsInput() {
+  console.log(myEventsSearchInput);
+  if (myEventsSearchInput !== '') {
+    tempHotels = [];
+    tempEvents = [];
+    eventInterested = '';
+    artistName = myEventsSearchInput;
+    $('#events').text('');
+    fetchEvents();
+    myEventsSearchInput = '';
+    localStorage.setItem("myEventsSearchInput", (JSON.stringify(myEventsSearchInput)));
+  }
+}
+
+searchMyEventsInput()
 displayMyEvents();
 
 
