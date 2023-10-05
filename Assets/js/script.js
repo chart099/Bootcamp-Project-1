@@ -6,7 +6,7 @@ var eventInterested;
 var tempEvents = [];
 var tempHotels = [];
 var savedEvents = JSON.parse(localStorage.getItem("savedEvents")) || [];
-
+var myEventsSearchInput = JSON.parse(localStorage.getItem("myEventsSearchInput")) || '';
 
 const fetchEvents = () => {
   const url = `${apiUrl}?keyword=${artistName}&apikey=${apiKey}`;
@@ -314,6 +314,21 @@ function displayMyEvents() {
   }
 }
 
+function searchMyEventsInput() {
+  console.log(myEventsSearchInput);
+  if (myEventsSearchInput !== '') {
+    tempHotels = [];
+    tempEvents = [];
+    eventInterested = '';
+    artistName = myEventsSearchInput;
+    $('#events').text('');
+    fetchEvents();
+    myEventsSearchInput = '';
+    localStorage.setItem("myEventsSearchInput", (JSON.stringify(myEventsSearchInput)));
+  }
+}
+
+searchMyEventsInput()
 displayMyEvents();
 
 
