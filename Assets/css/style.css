@@ -39,7 +39,7 @@ main {
   padding: 15px 8px;
   box-sizing: border-box;
   border-radius: 4px;
-  margin: 0 5px 0 10px;
+  margin: 0 5px 0 15px;
 }
 
 #my-events {
@@ -50,10 +50,10 @@ main {
 #events-container {
   width: 80%;
   background-color: grey;
-  padding: 15px 8px;
+  padding: 10px 0;
   box-sizing: border-box;
   border-radius: 4px;
-  margin: 0 10px 0 5px;
+  margin: 0 15px 0 5px;
 }
 
 .margin-y {
@@ -62,21 +62,30 @@ main {
 }
 
 .width-6 {
-  width: 45%;
+  width: 48%;
 }
 
 .events {
   display: flex;
   flex-wrap: wrap;
-  box-sizing: border-box;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  margin: 0;
+  border-radius: 4px;
+  padding-top: 10px;
+  padding: 10px 15px 10px 15px;
+  padding-bottom: 10px;
+  /* box-sizing: border-box; */
+  /* justify-content: space-evenly; */
 }
 
 .my-card {
   position: relative;
   border-radius: 4px;
   height: 200px;
-  margin-top: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 }
 
 .event-img {
@@ -138,7 +147,7 @@ height: 200px;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
  /* #favorites-star {
@@ -173,6 +182,7 @@ height: 200px;
   margin-top: 15px;
   padding: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-left: 10px;
 
 }
 
@@ -199,4 +209,8 @@ height: 200px;
   margin-top: 25%;
   width: 50px;
   height: 50px;
+}
+
+#container-title {
+  padding-left: 15px;
 }

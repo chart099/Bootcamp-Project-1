@@ -65,6 +65,8 @@ const displayEvents = (events) => {
       buyTickets.setAttribute("class", "buy-tickets");
       buyTickets.textContent = "Buy Tickets";
       eventInfo.appendChild(buyTickets);
+      buyTickets.setAttribute('href', event.url)
+      buyTickets.setAttribute('target', '_blank')
 
       // Update hotel to be the city
       // city = eventCity.textContent;
@@ -101,13 +103,12 @@ const displayEvents = (events) => {
           eventDate: event.dates.start.localDate,
           eventLocation: event._embedded?.venues[0]?.city?.name,
           eventImage: event.images[0].url,
+          eventTicketUrl: event.url,
           hotelName: '',
           hotelLocation: '',
         }
         console.log(eventToSave);
         tempEvents.push(eventToSave)
-    
-
 
     }
   } else {
@@ -116,15 +117,17 @@ const displayEvents = (events) => {
     eventsContainer.appendChild(noEventsMessage);
   }
 
- $('.favorites-star').on('click', function() {
+ $('.favorites-star').on('click', function(event) {
+    event.stopPropagation();
     console.log($(this).attr('id').slice(-1));
-    $(this).innerHTML = '<img src="./Assets/images/white-medium-star-emoji-2048x1960-v2wse4p9.png"></img>';
+    // $(this).innerHTML = '<img src="./Assets/images/white-medium-star-emoji-2048x1960-v2wse4p9.png"></img>';
 
 
     savedEvents.push(tempEvents[$(this).attr('id').slice(-1)])
     console.log(savedEvents);
     localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
-    displayEvents()
+    displayMyEvents()
+    $(this).css('background-color', 'rgba(255, 255, 0, 0.75)')
   })
 
     //     window.location = 'hotels.html'
@@ -137,7 +140,8 @@ const displayEvents = (events) => {
 
     // console.log('eventToSave');
 
-  $('.see-hotels').on("click", function() {
+  $('.see-hotels').on("click", function(event) {
+    event.stopPropagation();
     city = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)].eventLocation;
     // console.log($(this).parent().parent().children().eq(2).attr('id').slice(-1));
     eventInterested = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)];
@@ -147,16 +151,20 @@ const displayEvents = (events) => {
     eventsContainer.innerHTML = '<img src="Assets/images/loading-gif.gif" class="loading"></img>'
   })
 
-  $(".buy-tickets").on("click", function () {
-
+  $(".buy-tickets").on("click", function (event) {
+    event.stopPropagation()
+    console.log('clicked');
+    var url = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)].eventTicketUrl
+    window.open( url, '_blank')
   })
 
   console.log('results');
   console.log(tempEvents); 
 };
 
-document.querySelector('#search-btn').addEventListener('click', function () {
-  artistName = document.querySelector('#search-input').value;
+document.querySelector('#search-btn').addEventListener('click', function (event) {
+    event.stopPropagation();
+    artistName = document.querySelector('#search-input').value;
   fetchEvents();
 });
 
@@ -225,8 +233,9 @@ const fetchRapidAPIResponse = async () => {
         // eventsContainer.innerHTML = 'No hotels found';
       }
     }
-    $('.save-hotel-btn').on("click", function() {
-      console.log('clicked');
+    $('.save-hotel-btn').on("click", function(event) {
+    event.stopPropagation();
+    console.log('clicked');
       console.log($(this).attr('id'));
       eventInterested.hotelName = tempHotels[$(this).attr('id')].hotelName;
       eventInterested.hotelLocation = tempHotels[$(this).attr('id')].hotelLocation;
@@ -302,8 +311,9 @@ function displayMyEvents() {
       // myEventsContent.append(myEventTime);
 
     }
-    $('.card').on('click', function() {
-      window.location = 'my-events.html'
+    $('.card').on('click', function(event) {
+    event.stopPropagation();
+    window.location = 'my-events.html'
     })
   }
 }
