@@ -160,7 +160,7 @@ function openMyEvents() {
   window.location = 'my-events.html'
 }
 
-const hotelapiKey = 'd56cd525d3msh64494ca272228bdp1271a1jsn6bdf6bfcb40c';
+const hotelapiKey = '5a03e81cbemsh2ea460128eebb3dp1e7199jsn58c687101fee';
 // Hotel API 
 const fetchRapidAPIResponse = async () => {
   const url = `https://hotels4.p.rapidapi.com/locations/v3/search?q=${city}&locale=en_US&langid=1033&siteid=300000003`;
