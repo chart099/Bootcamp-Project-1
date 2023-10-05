@@ -168,6 +168,7 @@ const displayEvents = (events) => {
 document.querySelector('#search-btn').addEventListener('click', function (event) {
     event.stopPropagation();
     artistName = document.querySelector('#search-input').value;
+    $('#events').text('');
   fetchEvents();
 });
 
@@ -228,7 +229,7 @@ const fetchRapidAPIResponse = async () => {
         const hotelLocationP = $('<p>')
         hotelLocationP.text(hotel.hotelAddress.street + ' ' + hotel.hotelAddress.city + ', ' + hotel.hotelAddress.province)
 
-        $('#events-container').append(hotelCardDiv)
+        $('#events').append(hotelCardDiv)
         hotelCardDiv.append(saveHotelBtn, hotelNameH3, hotelLocationP) 
         index++;
 
