@@ -121,10 +121,9 @@ const displayEvents = (events) => {
 
  $('.favorites-star').on('click', function(event) {
     event.stopPropagation();
-
     savedEvents.push(tempEvents[$(this).attr('id').slice(-1)])
     localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
-    displayEvents()
+    displayMyEvents()
   })
 
     displayMyEvents()
@@ -306,21 +305,11 @@ function searchMyEventsInput() {
 
 function findHotelForMyEvent() {
   if (eventToAddHotel.length > 0) {
-    // tempHotels = [];
-    // tempEvents.push(savedEvents[eventToAddHotel]);
-    // console.log(tempEvents);
-    // eventInterested = '';
     $('#events').text('');
-    // myEventsSearchInput = '';
-    // localStorage.setItem("myEventsSearchInput", (JSON.stringify(myEventsSearchInput)));
     city = savedEvents[eventToAddHotel].eventLocation;
-    // console.log(city);
     existingEvent = true;
     fetchRapidAPIResponse()
-    // eventToAddHotel = '';
-    // localStorage.setItem("eventToAddHotel", (JSON.stringify(eventToAddHotel)));
     eventsContainer.innerHTML = '';  // Clear previous events
-    fetchRapidAPIResponse()
     eventsContainer.innerHTML = '<img src="Assets/images/loading-gif.gif" class="loading"></img>'
   } 
 }
