@@ -214,3 +214,14 @@ height: 200px;
 #container-title {
   padding-left: 15px;
 }
+
+@media screen and (max-width: 1024px) {
+
+}
+
+@media screen and (max-width: 480px) {
+  #favorite-events {
+    display: none;
+  }
+  
+}
