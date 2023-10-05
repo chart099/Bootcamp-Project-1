@@ -125,9 +125,9 @@ const displayEvents = (events) => {
     localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
 
 
-//     window.location = 'hotels.html'
+    window.location = 'hotels.html'
 
-//     window.location = 'hotels.html'
+
 
   console.log('eventToSave');
   displayMyEvents()
@@ -137,7 +137,10 @@ const displayEvents = (events) => {
   // console.log('eventToSave');
 
   $('.see-hotels').on("click", function() {
+    city = $(this).event._embedded?.venues[0]?.name
+    console.log(city);
     window.location = 'hotels.html';
+    
   })
 
   $(".buy-tickets").on("click", function () {
@@ -271,5 +274,5 @@ function displayMyEvents() {
     }
   }
 }
-displayMyEvents()
+displayMyEvents();
 
