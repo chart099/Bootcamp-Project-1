@@ -17,7 +17,7 @@ function displaySavedEvents() {
     eventImg.addClass('event-img event-border')
 
     const eventInfoSec = $('<section>')
-    eventInfoSec.addClass('info')
+    eventInfoSec.addClass('info event-border')
 
     const eventNameH3 = $('<h3>')
     eventNameH3.addClass('name')
