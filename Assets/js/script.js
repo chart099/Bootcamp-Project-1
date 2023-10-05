@@ -25,6 +25,7 @@ const fetchEvents = () => {
 };
 
 const displayEvents = (events) => {
+  console.log(events)
   const eventsContainer = document.getElementById('events');
   eventsContainer.innerHTML = '';  // Clear previous events
 
@@ -53,6 +54,16 @@ const displayEvents = (events) => {
 
       const eventCity = document.createElement('p');
       eventCity.textContent = event._embedded?.venues[0]?.city?.name || 'City not specified';
+
+      const seeHotels = document.createElement("button");
+      seeHotels.setAttribute("class", "see-hotels")
+      seeHotels.textContent = "See Hotels";
+      eventInfo.appendChild(seeHotels);
+
+      const buyTickets = document.createElement("button");
+      buyTickets.setAttribute("class", "buy-tickets");
+      buyTickets.textContent = "Buy Tickets";
+      eventInfo.appendChild(buyTickets);
 
       // Update hotel to be the city
       city = eventCity.textContent;
@@ -114,8 +125,20 @@ const displayEvents = (events) => {
     console.log(savedEvents);
     localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
     window.location = 'hotels.html'
+
   console.log('eventToSave');
   displayMyEvents()
+
+  // console.log('eventToSave');
+
+  $('.see-hotels').on("click", function() {
+    
+  })
+
+  $(".buy-tickets").on("click", function () {
+
+  })
+
   })
 console.log('results');
 
@@ -128,7 +151,7 @@ document.querySelector('#search-btn').addEventListener('click', function () {
   fetchEvents();
 });
 
-const hotelapiKey = '5fed209256mshfd9f27707640df2p1856b4jsnbad75008378b';
+const hotelapiKey = 'd56cd525d3msh64494ca272228bdp1271a1jsn6bdf6bfcb40c';
 
 const fetchRapidAPIResponse = async () => {
   const url = `https://hotels4.p.rapidapi.com/locations/v3/search?q=${city}&locale=en_US&langid=1033&siteid=300000003`;
@@ -139,14 +162,22 @@ const fetchRapidAPIResponse = async () => {
       'X-RapidAPI-Key': hotelapiKey,
       'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
     }
-  };
+  }
+
   try {
     const response = await fetch(url, options);
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
     const data = await response.json();
-    console.log('RapidAPI Response:', data.sr);
+    console.log
+    // Log hotel addresses for elements with type 'HOTEL'
+    for (var i = 0; i < data.sr.length; i++) {
+      if (data.sr[i].type === 'HOTEL') {
+        console.log('found')
+        console.log('Hotel:', data.sr[i]);
+      }
+    }
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -207,3 +238,4 @@ function displayMyEvents() {
   }
 }
 displayMyEvents()
+
