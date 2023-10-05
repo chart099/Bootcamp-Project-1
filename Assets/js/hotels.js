@@ -10,25 +10,25 @@ city = savedEvents[savedEvents.length-1].eventLocation
 
 
 
-const fetchEvents = () => {
-  const url = `${apiUrl}?keyword=${artistName}&apikey=${apiKey}`;
+// const fetchEvents = () => {
+//   const url = `${apiUrl}?keyword=${artistName}&apikey=${apiKey}`;
 
-  fetch(url)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('API Response:', data);
-      displayEvents(data._embedded?.events);
-    })
-    .catch(error => console.error('Error fetching data:', error));
-};
+//   fetch(url)
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error('Network response was not ok');
+//       }
+//       return response.json();
+//     })
+//     .then(data => {
+//       console.log('API Response:', data);
+//       displayEvents(data._embedded?.events);
+//     })
+//     .catch(error => console.error('Error fetching data:', error));
+// };
 
-const displayEvents = (events) => {
-  const eventsContainer = document.getElementById('events');
+const displayHotel = (events) => {
+  const eventsContainer = document.getElementById('hotel-cards-container');
   eventsContainer.innerHTML = '';  // Clear previous events
 
   const numEventsToShow = 5;  // Number of events to display

@@ -56,7 +56,7 @@ const displayEvents = (events) => {
 
       // Update hotel to be the city
       city = eventCity.textContent;
-      fetchRapidAPIResponse();
+      // fetchRapidAPIResponse();
 
       const eventDate = document.createElement('p');
       eventDate.textContent = `Date: ${event.dates.start.localDate}`;
@@ -112,7 +112,7 @@ const displayEvents = (events) => {
     savedEvents.push(tempEvents[$(this).attr('id').slice(-1)])
     console.log(savedEvents);
     localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
-    window.location = 'hotels.html'
+    // window.location = 'hotels.html'
   // console.log('eventToSave');
   })
 // console.log('results');
@@ -126,28 +126,32 @@ document.querySelector('#search-btn').addEventListener('click', function () {
   fetchEvents();
 });
 
-const hotelapiKey = '5fed209256mshfd9f27707640df2p1856b4jsnbad75008378b';
+// const hotelapiKey = '5fed209256mshfd9f27707640df2p1856b4jsnbad75008378b';
 
-const fetchRapidAPIResponse = async () => {
-  const url = `https://hotels4.p.rapidapi.com/locations/v3/search?q=${city}&locale=en_US&langid=1033&siteid=300000003`;
+// const fetchRapidAPIResponse = async () => {
+//   const url = `https://hotels4.p.rapidapi.com/locations/v3/search?q=${city}&locale=en_US&langid=1033&siteid=300000003`;
 
-  const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': hotelapiKey,
-      'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
-    }
-  };
-  try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data = await response.json();
-    console.log('RapidAPI Response:', data.sr);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
+//   const options = {
+//     method: 'GET',
+//     headers: {
+//       'X-RapidAPI-Key': hotelapiKey,
+//       'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
+//     }
+//   };
+//   try {
+//     const response = await fetch(url, options);
+//     if (!response.ok) {
+//       throw new Error('Network response was not ok');
+//     }
+//     const data = await response.json();
+//     console.log('RapidAPI Response:', data.sr);
+//   } catch (error) {
+//     console.error('Error fetching data:', error);
+//   }
+// }
+
+function openMyEvents() {
+  window.location = 'my-events.html'
 }
 
 
