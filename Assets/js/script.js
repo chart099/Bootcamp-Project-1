@@ -2,12 +2,14 @@ const apiKey = 'iIm9cRrzUWIOEnRZYIrJy0Adv7GdRjad';
 const apiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
 let artistName = '';  // Replace with the artist you're interested in
 var city; // Global Variable for the city 
-var eventInterested;
+var eventInterested; // Temporary Event save
+// Temporary storage array for events and hotels
 var tempEvents = [];
 var tempHotels = [];
+// Retrieve saved events from localStorage or initialize as an empty array
 var savedEvents = JSON.parse(localStorage.getItem("savedEvents")) || [];
 
-
+// Function to fetch events based on the artist/event name
 const fetchEvents = () => {
   const url = `${apiUrl}?keyword=${artistName}&apikey=${apiKey}`;
 
@@ -24,7 +26,7 @@ const fetchEvents = () => {
     })
     .catch(error => console.error('Error fetching data:', error));
 };
-
+// Function to open the Ticketmaster event page in a new tab
 const openTicketmasterEventPage = (eventUrl) => {
   if (eventUrl) {
     window.open(eventUrl, '_blank');
@@ -32,7 +34,7 @@ const openTicketmasterEventPage = (eventUrl) => {
     console.error('Event URL is not available.');
   }
 };
-
+// Function to display events on the webpage
 const displayEvents = (events) => {
   console.log(events)
   const eventsContainer = document.getElementById('events');
@@ -63,7 +65,8 @@ const displayEvents = (events) => {
 
       const eventCity = document.createElement('p');
       eventCity.textContent = event._embedded?.venues[0]?.city?.name || 'City not specified';
-
+      
+       // Buttons to see hotels and buy tickets
       const seeHotels = document.createElement("button");
       seeHotels.setAttribute("class", "see-hotels")
       seeHotels.textContent = "See Hotels";
@@ -130,7 +133,7 @@ const displayEvents = (events) => {
     console.log('eventToSave');
     displayMyEvents()
 
-  // EVENT BUTTONS HERE
+  // Handling see hotels button click
   $('.see-hotels').on("click", function() {
     city = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)].eventLocation;
     eventInterested = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)];
