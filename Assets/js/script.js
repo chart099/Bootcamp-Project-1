@@ -123,6 +123,8 @@ const displayEvents = (events) => {
     event.stopPropagation();
     savedEvents.push(tempEvents[$(this).attr('id').slice(-1)])
     localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
+    console.log($(this));
+    $(this).css('background-color', 'rgba(255, 255, 0, .85)')
     displayMyEvents()
   })
 
