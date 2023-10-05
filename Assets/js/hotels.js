@@ -28,9 +28,31 @@ const fetchEvents = () => {
     .catch(error => console.error('Error fetching data:', error));
 };
 
+const displayHotel = (events) => {
+  const eventsContainer = document.getElementById('hotel-cards-container');
+  eventsContainer.innerHTML = '';  // Clear previous events
+=======
+const fetchEvents = () => {
+  const url = `${apiUrl}?keyword=${artistName}&apikey=${apiKey}`;
+
+  fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('API Response:', data);
+      displayEvents(data._embedded?.events);
+    })
+    .catch(error => console.error('Error fetching data:', error));
+};
+
 const displayHotels = () => {
   const hotelContainer = document.getElementById('hotels-card-container');
   hotelContainer.innerHTML = '';  // Clear previous events
+
 
   const numEventsToShow = 5;  // Number of events to display
 

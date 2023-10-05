@@ -2,32 +2,31 @@ var savedEvents = JSON.parse(localStorage.getItem("savedEvents")) || [];
 
 function displaySavedEvents() {
   for (var i=0; i < savedEvents.length; i++) {
-
+    var event = savedEvents[i];
+    
     const eventCardDiv = $('<div>');
     eventCardDiv.addClass('event-card')
     
     const eventInfoDiv = $('<div>');
     eventInfoDiv.addClass('event-info')
-    eventInfoDiv.text()
 
     const eventImg = $('<img>')
-    eventImg.attr('src', '')
-    eventImg.attr('alt', '')
+    eventImg.attr('src', event.eventImage)
+    eventImg.attr('alt', event.eventImageAlt)
     eventImg.addClass('event-img event-border')
 
     const eventInfoSec = $('<section>')
     eventInfoSec.addClass('info')
-    eventInfoSec.text()
 
     const eventNameH3 = $('<h3>')
     eventNameH3.addClass('name')
-    eventNameH3.text()
+    eventNameH3.text(event.eventName)
 
     const eventDateP = $('<p>')
-    eventDateP.text()
+    eventDateP.text(event.eventDate)
 
     const eventLocationP = $('<p>')
-    eventLocationP.text()
+    eventLocationP.text(event.eventLocation)
 
     const hotelInfoDiv = $('<div>')
     hotelInfoDiv.addClass('event-info')
@@ -63,7 +62,6 @@ function displaySavedEvents() {
 }
 
 function test() {
-
   const eventCardDiv = $('<div>');
   eventCardDiv.addClass('event-card')
   
@@ -80,13 +78,13 @@ function test() {
   
   const eventNameH3 = $('<h3>')
   eventNameH3.addClass('name')
-  eventNameH3.text('a;slkfj')
+  eventNameH3.text('Event Name')
   
   const eventDateP = $('<p>')
-  eventDateP.text('a;slkfj')
+  eventDateP.text('Location')
   
   const eventLocationP = $('<p>')
-  eventLocationP.text('a;slkfj')
+  eventLocationP.text('Date')
 
   const hotelInfoDiv = $('<div>')
   hotelInfoDiv.addClass('event-info')
@@ -101,13 +99,13 @@ function test() {
 
   const hotelNameH3 = $('<h3>')
   hotelNameH3.addClass('name')
-  hotelNameH3.text('a;slkfj')
+  hotelNameH3.text('Hotel')
 
   const hotelDateP = $('<p>')
-  hotelDateP.text('a;slkfj')
+  hotelDateP.text('Location')
 
   const hotelLocationP = $('<p>')
-  hotelLocationP.text('a;slkfj')
+  hotelLocationP.text('Address')
 
   $('#my-events').append(eventCardDiv)
   eventCardDiv.append(eventInfoDiv)
@@ -116,5 +114,9 @@ function test() {
   eventCardDiv.append(hotelInfoDiv)
   hotelInfoDiv.append(hotelImg, hotelInfoSec)
   hotelInfoSec.append(hotelNameH3, hotelDateP, hotelLocationP)
+}
+
+function openHomePage() {
+  window.location = 'index.html'
 }
 
