@@ -124,6 +124,10 @@ nav {
   height: auto;
 }
 
+#favorite-events {
+  background-color: var(--red);
+}
+
 .align-left {
   text-align: left;
 }
@@ -133,9 +137,7 @@ nav {
 }
 
 .card {
-/* background-image: url(./../images/hero-genre_Generic_PlaceHolder.avif); */
-/* background-repeat: no-repeat;
-background-size: cover; */
+
 background-color: #f0f0f0;
 margin-top: 10px;
 position: relative;
