@@ -7,13 +7,15 @@
 }
 
 html {
-  background-color: hsl(0, 0%, 21%);
+  
   height: 100%;
+  background-color: var(--blue);
 }
 
 body {
   min-height: 100%;
   min-width: 100%;
+  background-color: var(--blue);
 }
 
 .margin-top {
@@ -34,11 +36,20 @@ main {
   width: 100%;
   margin: 65px 0 15px 0;
   box-sizing: border-box;
+ 
+}
+
+nav {
+  background-color: var(--charcoal);
+}
+
+.navbar {
+  background-color: var(--charcoal);
 }
 
 #favorite-events {
   width: 20%;
-  background-color: grey;
+  background-color: var(--snow);
   padding: 15px 8px;
   box-sizing: border-box;
   border-radius: 4px;
@@ -52,7 +63,7 @@ main {
 
 #events-container {
   width: 80%;
-  background-color: grey;
+  background-color: var(--snow);
   padding: 10px 0;
   box-sizing: border-box;
   border-radius: 4px;
@@ -92,7 +103,6 @@ main {
 }
 
 .event-img {
-  /* position: relative; */
   object-fit: cover;
   height: 100%;
   width: 100%;
@@ -186,5 +196,40 @@ height: 200px;
 #home-btn:hover,
 #my-events-btn:hover {
   background-color: rgb(78, 76, 76);
+}
+
+
+.save-hotel-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(128, 128, 128, 0.5);
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+}
+
+.loading {
+  margin-top: 25%;
+  width: 50px;
+  height: 50px;
+}
+
+#container-title {
+  padding-left: 15px;
+}
+
+@media screen and (max-width: 1024px) {
+
+}
+
+@media screen and (max-width: 480px) {
+  #favorite-events {
+    display: none;
+  }
+  
 }
 
