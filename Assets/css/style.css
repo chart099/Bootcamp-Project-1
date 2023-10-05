@@ -77,8 +77,7 @@ main {
   padding-top: 10px;
   padding: 10px 15px 10px 15px;
   padding-bottom: 10px;
-  /* box-sizing: border-box; */
-  /* justify-content: space-evenly; */
+
 }
 
 .my-card {
@@ -92,7 +91,7 @@ main {
 }
 
 .event-img {
-  /* position: relative; */
+
   object-fit: cover;
   height: 100%;
   width: 100%;
@@ -123,9 +122,6 @@ main {
 }
 
 .card {
-/* background-image: url(./../images/hero-genre_Generic_PlaceHolder.avif); */
-/* background-repeat: no-repeat;
-background-size: cover; */
 background-color: #f0f0f0;
 margin-top: 10px;
 position: relative;
