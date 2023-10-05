@@ -1,6 +1,13 @@
 var savedEvents = JSON.parse(localStorage.getItem("savedEvents")) || [];
 console.log(savedEvents);
 
+document.querySelector('#search-btn').addEventListener('click', function (event) {
+  event.stopPropagation();
+  var searchInput = document.querySelector('#search-input').value;
+  localStorage.setItem("myEventsSearchInput", (JSON.stringify(searchInput)));
+  window.location = 'index.html';
+});
+
 // function to search through events saved in local storage and display events to the page
 function displaySavedEvents() {
   for (var i=0; i < savedEvents.length; i++) {
