@@ -1,3 +1,11 @@
+:root {
+  --platinum: #d3d4d9;
+  --blue: #4b88a2;
+  --red: #bb0a21;
+  --charcoal: #252627;
+  --snow: #fff9fb;
+}
+
 html {
   background-color: hsl(0, 0%, 21%);
   height: 100%;
@@ -11,11 +19,6 @@ body {
 .margin-top {
   margin-top: 60px !important;
 }
-
-/* html, body {
-  margin: 0 !important;
-  height: 100% !important;
-} */
 
 .rounded-corner {
   border-radius: 8px;
@@ -150,13 +153,6 @@ height: 200px;
   margin-right: 15px;
 }
 
- /* #favorites-star {
-  height: 20px;
-  position: absolute;
-  top: 0;
-  right: 0;
-} */
-
 .save-icon {
   position: absolute;
   top: 0;
@@ -192,36 +188,3 @@ height: 200px;
   background-color: rgb(78, 76, 76);
 }
 
-.save-hotel-btn {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(128, 128, 128, 0.5);
-  border: none;
-  border-radius: 4px;
-  padding: 10px;
-  margin: 10px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-}
-
-.loading {
-  margin-top: 25%;
-  width: 50px;
-  height: 50px;
-}
-
-#container-title {
-  padding-left: 15px;
-}
-
-@media screen and (max-width: 1024px) {
-
-}
-
-@media screen and (max-width: 480px) {
-  #favorite-events {
-    display: none;
-  }
-  
-}
