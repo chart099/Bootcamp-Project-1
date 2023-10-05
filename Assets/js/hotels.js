@@ -1,4 +1,4 @@
-const apiKey = 'iIm9cRrzUWIOEnRZYIrJy0Adv7GdRjad';
+const apiKey = 'd56cd525d3msh64494ca272228bdp1271a1jsn6bdf6bfcb40c';
 const apiUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
 let artistName = '';  // Replace with the artist you're interested in
 var city;
