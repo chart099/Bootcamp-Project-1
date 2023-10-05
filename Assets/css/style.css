@@ -7,13 +7,15 @@
 }
 
 html {
-  background-color: hsl(0, 0%, 21%);
+  
   height: 100%;
+  background-color: var(--blue);
 }
 
 body {
   min-height: 100%;
   min-width: 100%;
+  background-color: var(--blue);
 }
 
 .margin-top {
@@ -34,11 +36,20 @@ main {
   width: 100%;
   margin: 65px 0 15px 0;
   box-sizing: border-box;
+ 
+}
+
+nav {
+  background-color: var(--charcoal);
+}
+
+.navbar {
+  background-color: var(--charcoal);
 }
 
 #favorite-events {
   width: 20%;
-  background-color: grey;
+  background-color: var(--snow);
   padding: 15px 8px;
   box-sizing: border-box;
   border-radius: 4px;
@@ -52,7 +63,7 @@ main {
 
 #events-container {
   width: 80%;
-  background-color: grey;
+  background-color: var(--snow);
   padding: 15px 8px;
   box-sizing: border-box;
   border-radius: 4px;
@@ -83,7 +94,6 @@ main {
 }
 
 .event-img {
-  /* position: relative; */
   object-fit: cover;
   height: 100%;
   width: 100%;
