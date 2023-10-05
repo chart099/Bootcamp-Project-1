@@ -41,20 +41,21 @@ body {
 
 #my-events {
   background-color: grey;
-  /* box-sizing: border-box; */
   display: flex;
-  /* flex-direction: column; */
+  flex-wrap: wrap;
+  justify-content: space-around;
   margin: 65px 15px 0 15px;
   border-radius: 4px;
   padding-top: 10px;
   padding: 10px 15px 10px 15px;
   padding-bottom: 10px;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  /* box-sizing: border-box; */
+  /* flex-direction: column; */
 }
 
 .event-card {
   display: flex;
+  border-radius: 4px;
   height: 200px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -83,11 +84,24 @@ body {
   position: absolute;
   /* display: flex; */
   /* justify-content: left; */
-  width: 50%;
+  width: 100%;
   top: 0;
   right: 0;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.800);
+  color: white;
+  padding: 10px;
+}
+
+.hotel-info {
+  position: absolute;
+  /* display: flex; */
+  /* justify-content: left; */
+  width: 100%;
+  top: 0;
+  right: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 1.00);
   color: white;
   padding: 10px;
 }
