@@ -257,7 +257,6 @@ const fetchRapidAPIResponse = async () => {
 
 };
 
-
 function displayMyEvents() {
   if (savedEvents.length > 0) {
       $('#my-events').text('');
