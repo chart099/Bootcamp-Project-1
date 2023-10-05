@@ -9,6 +9,9 @@ var tempHotels = [];
 // Retrieve saved events from localStorage or initialize as an empty array
 var savedEvents = JSON.parse(localStorage.getItem("savedEvents")) || [];
 var myEventsSearchInput = JSON.parse(localStorage.getItem("myEventsSearchInput")) || '';
+var eventToAddHotel = JSON.parse(localStorage.getItem("eventToAddHotel")) || '';
+const eventsContainer = document.getElementById('events');
+var existingEvent;;
 
 // Function to fetch events based on the artist/event name
 const fetchEvents = () => {
@@ -36,7 +39,6 @@ const openTicketmasterEventPage = (eventUrl) => {
 };
 // Function to display events on the webpage
 const displayEvents = (events) => {
-  const eventsContainer = document.getElementById('events');
   eventsContainer.innerHTML = '';  // Clear previous events
 
   const numEventsToShow = 5;  // Number of events to display
@@ -117,9 +119,6 @@ const displayEvents = (events) => {
     eventsContainer.appendChild(noEventsMessage);
   }
 
- $('.favorites-star').on('click', function() {
-    console.log($(this).attr('id').slice(-1));
-    $(this).innerHTML = '<img src="./Assets/images/white-medium-star-emoji-2048x1960-v2wse4p9.png"></img>';
  $('.favorites-star').on('click', function(event) {
     event.stopPropagation();
 
@@ -217,17 +216,27 @@ const fetchRapidAPIResponse = async () => {
     // Save Hotel Button sections
     $('.save-hotel-btn').on("click", function(event) {
     event.stopPropagation();
+      if (existingEvent === true) {
+        console.log('true');
+        savedEvents[eventToAddHotel].hotelName = tempHotels[$(this).attr('id')].hotelName;
+        savedEvents[eventToAddHotel].hotelLocation = tempHotels[$(this).attr('id')].hotelLocation;
+        localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
+        eventToAddHotel = '';
+        localStorage.setItem("eventToAddHotel", (JSON.stringify(eventToAddHotel)));
+        window.location = 'my-events.html';
+      } else {
+        eventInterested.hotelName = tempHotels[$(this).attr('id')].hotelName;
+        eventInterested.hotelLocation = tempHotels[$(this).attr('id')].hotelLocation;
+  
+        savedEvents.push(eventInterested)
+        localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
+  
+        tempHotels = [];
+        tempEvents = [];
+        eventInterested = '';
+        window.location = 'my-events.html';
+      }
 
-      eventInterested.hotelName = tempHotels[$(this).attr('id')].hotelName;
-      eventInterested.hotelLocation = tempHotels[$(this).attr('id')].hotelLocation;
-
-      savedEvents.push(eventInterested)
-      localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
-
-      window.location = 'my-events.html';
-      tempHotels = [];
-      tempEvents = [];
-      eventInterested = '';
     })
 
   } catch (error) {
@@ -283,7 +292,6 @@ function displayMyEvents() {
 }
 
 function searchMyEventsInput() {
-  console.log(myEventsSearchInput);
   if (myEventsSearchInput !== '') {
     tempHotels = [];
     tempEvents = [];
@@ -296,7 +304,29 @@ function searchMyEventsInput() {
   }
 }
 
-searchMyEventsInput()
+function findHotelForMyEvent() {
+  if (eventToAddHotel.length > 0) {
+    // tempHotels = [];
+    // tempEvents.push(savedEvents[eventToAddHotel]);
+    // console.log(tempEvents);
+    // eventInterested = '';
+    $('#events').text('');
+    // myEventsSearchInput = '';
+    // localStorage.setItem("myEventsSearchInput", (JSON.stringify(myEventsSearchInput)));
+    city = savedEvents[eventToAddHotel].eventLocation;
+    // console.log(city);
+    existingEvent = true;
+    fetchRapidAPIResponse()
+    // eventToAddHotel = '';
+    // localStorage.setItem("eventToAddHotel", (JSON.stringify(eventToAddHotel)));
+    eventsContainer.innerHTML = '';  // Clear previous events
+    fetchRapidAPIResponse()
+    eventsContainer.innerHTML = '<img src="Assets/images/loading-gif.gif" class="loading"></img>'
+  } 
+}
+
+findHotelForMyEvent();
+searchMyEventsInput();
 displayMyEvents();
 
 

@@ -15,7 +15,8 @@ function displaySavedEvents() {
     // creating each event and adding corrasponding classes and text values
     const eventCardDiv = $('<div>');
     eventCardDiv.addClass('event-card')
-    
+    eventCardDiv.attr('id', i)
+
     const eventInfoDiv = $('<div>');
     eventInfoDiv.addClass('event-info')
 
@@ -42,22 +43,44 @@ function displaySavedEvents() {
 
     const hotelInfoSec = $('<section>')
     hotelInfoSec.addClass('hotel-info hotel-border')
+    if (event.hotelName === '') {
+      console.log('no name');
+      const findHotelBtn = $('<button>')
+      findHotelBtn.addClass('hotel-button')
+      findHotelBtn.text('Find hotel')
+      
+      // appending all elements to the page
+      $('#my-events').append(eventCardDiv)
+      eventCardDiv.append(eventInfoDiv)
+      eventInfoDiv.append(eventImg, eventInfoSec)
+      eventInfoSec.append(eventNameH3, eventDateP, eventLocationP)
+      eventCardDiv.append(hotelInfoDiv)
+      hotelInfoDiv.append(hotelInfoSec)
+      hotelInfoSec.append(findHotelBtn)
 
-    const hotelNameH3 = $('<h3>')
-    hotelNameH3.addClass('name')
-    hotelNameH3.text(event.hotelName)
+    } else {
+      const hotelNameH3 = $('<h3>')
+      hotelNameH3.addClass('name')
+      hotelNameH3.text(event.hotelName)
 
-    const hotelLocationP = $('<p>')
-    hotelLocationP.text(event.hotelLocation)
-    // appending all elements to the page
-    $('#my-events').append(eventCardDiv)
-    eventCardDiv.append(eventInfoDiv)
-    eventInfoDiv.append(eventImg, eventInfoSec)
-    eventInfoSec.append(eventNameH3, eventDateP, eventLocationP)
-    eventCardDiv.append(hotelInfoDiv)
-    hotelInfoDiv.append(hotelInfoSec)
-    hotelInfoSec.append(hotelNameH3, hotelLocationP)
+      const hotelLocationP = $('<p>')
+      hotelLocationP.text(event.hotelLocation)
+      // appending all elements to the page
+      $('#my-events').append(eventCardDiv)
+      eventCardDiv.append(eventInfoDiv)
+      eventInfoDiv.append(eventImg, eventInfoSec)
+      eventInfoSec.append(eventNameH3, eventDateP, eventLocationP)
+      eventCardDiv.append(hotelInfoDiv)
+      hotelInfoDiv.append(hotelInfoSec)
+      hotelInfoSec.append(hotelNameH3, hotelLocationP)
+    }
   }
+  $('.hotel-button').on('click', function (event) {
+    event.stopPropagation()
+    var eventToAddHotel = $(this).parent().parent().parent().attr('id');
+    localStorage.setItem("eventToAddHotel", (JSON.stringify(eventToAddHotel)));
+    window.location = 'index.html';
+  })
 }
 // function to take user to the homepage
 function openHomePage() {

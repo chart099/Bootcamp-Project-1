@@ -118,8 +118,8 @@ body {
 
 .event-card:hover {
   opacity: 60%;
-  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;}
 
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;}
 
 #search-btn:hover {
   opacity: 65%;
@@ -128,4 +128,18 @@ body {
 #home-btn:hover,
 #my-events-btn:hover {
   background-color: rgb(78, 76, 76);
+}
+
+.hotel-button {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  /* color: white; */
+  background-color: white;
+  /* width: 25%;
+  height: 25%; */
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: rgba(177, 177, 177, 0.2) 0px 2px 8px 0px;
 }
