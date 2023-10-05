@@ -1,3 +1,11 @@
+:root {
+  --platinum: #d3d4d9;
+  --blue: #4b88a2;
+  --red: #bb0a21;
+  --charcoal: #252627;
+  --snow: #fff9fb;
+}
+
 html {
   height: 100%;
   background-color: hsl(0, 0%, 21%);
@@ -13,11 +21,6 @@ body {
 .margin-top {
   margin-top: 60px !important;
 }
-
-/* html, body {
-  margin: 0 !important;
-  height: 100% !important;
-} */
 
 .rounded-corner {
   border-radius: 8px;
@@ -49,8 +52,6 @@ body {
   padding-top: 10px;
   padding: 10px 15px 10px 15px;
   padding-bottom: 10px;
-  /* box-sizing: border-box; */
-  /* flex-direction: column; */
 }
 
 .event-card {
@@ -118,12 +119,7 @@ body {
 .event-card:hover {
   opacity: 60%;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;}
-/* #favorites-star {
-  height: 20px;
-  position: absolute;
-  top: 0;
-  right: 0;
-} */
+
 
 #search-btn:hover {
   opacity: 65%;
