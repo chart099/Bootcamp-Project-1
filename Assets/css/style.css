@@ -1,21 +1,26 @@
+:root {
+  --platinum: #d3d4d9;
+  --blue: #4b88a2;
+  --red: #bb0a21;
+  --charcoal: #252627;
+  --snow: #fff9fb;
+}
+
 html {
-  background-color: hsl(0, 0%, 21%);
+  
   height: 100%;
+  background-color: var(--blue);
 }
 
 body {
   min-height: 100%;
   min-width: 100%;
+  background-color: var(--blue);
 }
 
 .margin-top {
   margin-top: 60px !important;
 }
-
-/* html, body {
-  margin: 0 !important;
-  height: 100% !important;
-} */
 
 .rounded-corner {
   border-radius: 8px;
@@ -31,11 +36,20 @@ main {
   width: 100%;
   margin: 65px 0 15px 0;
   box-sizing: border-box;
+ 
+}
+
+nav {
+  background-color: var(--charcoal);
+}
+
+.navbar {
+  background-color: var(--charcoal);
 }
 
 #favorite-events {
   width: 20%;
-  background-color: grey;
+  background-color: var(--snow);
   padding: 15px 8px;
   box-sizing: border-box;
   border-radius: 4px;
@@ -49,7 +63,7 @@ main {
 
 #events-container {
   width: 80%;
-  background-color: grey;
+  background-color: var(--snow);
   padding: 10px 0;
   box-sizing: border-box;
   border-radius: 4px;
@@ -89,7 +103,6 @@ main {
 }
 
 .event-img {
-  /* position: relative; */
   object-fit: cover;
   height: 100%;
   width: 100%;
@@ -150,13 +163,6 @@ height: 200px;
   margin-right: 15px;
 }
 
- /* #favorites-star {
-  height: 20px;
-  position: absolute;
-  top: 0;
-  right: 0;
-} */
-
 .save-icon {
   position: absolute;
   top: 0;
@@ -192,6 +198,7 @@ height: 200px;
   background-color: rgb(78, 76, 76);
 }
 
+
 .save-hotel-btn {
   position: absolute;
   bottom: 0;
@@ -214,3 +221,15 @@ height: 200px;
 #container-title {
   padding-left: 15px;
 }
+
+@media screen and (max-width: 1024px) {
+
+}
+
+@media screen and (max-width: 480px) {
+  #favorite-events {
+    display: none;
+  }
+  
+}
+
