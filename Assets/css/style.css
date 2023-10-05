@@ -236,4 +236,7 @@ height: 200px;
   #favorite-events {
     display: none;
   }
+  body {
+    overflow: hidden;
+  }
 }
