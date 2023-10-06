@@ -12,6 +12,7 @@ var myEventsSearchInput = JSON.parse(localStorage.getItem("myEventsSearchInput")
 var eventToAddHotel = JSON.parse(localStorage.getItem("eventToAddHotel")) || '';
 const eventsContainer = document.getElementById('events');
 var existingEvent;
+var tempEventToAddHotel;
 
 // Function to fetch events based on the artist/event name
 const fetchEvents = () => {
@@ -229,8 +230,10 @@ const fetchRapidAPIResponse = async () => {
 
         $('#events').append(hotelCardDiv)
         hotelCardDiv.append(saveHotelBtn, hotelNameH3, hotelLocationP) 
+        tempEventToAddHotel = eventToAddHotel;
         eventToAddHotel = '';
         localStorage.setItem("eventToAddHotel", (JSON.stringify(eventToAddHotel)));
+
         index++;
       } else { console.log('no hotels found');}
     }
@@ -239,8 +242,8 @@ const fetchRapidAPIResponse = async () => {
     event.stopPropagation();
       if (existingEvent === true) {
         console.log('true');
-        savedEvents[eventToAddHotel].hotelName = tempHotels[$(this).attr('id')].hotelName;
-        savedEvents[eventToAddHotel].hotelLocation = tempHotels[$(this).attr('id')].hotelLocation;
+        savedEvents[tempEventToAddHotel].hotelName = tempHotels[$(this).attr('id')].hotelName;
+        savedEvents[tempEventToAddHotel].hotelLocation = tempHotels[$(this).attr('id')].hotelLocation;
         localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
         eventToAddHotel = '';
         localStorage.setItem("eventToAddHotel", (JSON.stringify(eventToAddHotel)));
