@@ -8,44 +8,30 @@
   <link rel="stylesheet" href="./Assets/css/style.css">
 </head>
 <body>
-  <!-- nav bar -->
-  <nav class="navbar is-fixed-top " role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
-        <h1 class=" has-text-white">Trip Tix</h1>
-      </a>
-  
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
+  <nav id="media-nav">
+    <div class="flex">
+      <a onclick="openHomePage()">Tip Trix</a>
+      <a href="#" id="home-btn">Home</a>
+      <a onclick="openMyEvents()" id="my-events-btn">My Events</a>
     </div>
-  
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item  has-text-white" href="#" id="home-btn">
-          Home
-        </a>
-        <a class="navbar-item  has-text-white" onclick="openMyEvents()" id="my-events-btn">
-          My Events
-        </a>
-      </div>
-    </div>
-
-    <div class="navbar-end  search-bar">
-        <button id="search-btn" class="button margin-x">Search</button>
-        <input id="search-input" class="input" type="text" placeholder="Input an event">
+    <div class="search-div">
+      <button class="button" id="search-btn" type="submit">Search</button>
+      <input type="text" name="" id="search-input" class="input" placeholder="Input an event">
     </div>
   </nav>
+
   <main>
     <section id="favorite-events">
-      <h2 class="has-text-white">My Events</h2>
+      <div class="title-box">
+        <h2 class="has-text-white">My Events</h2>
+      </div>
       <div id="my-events">
       </div>
     </section>
     <section id="events-container">
-      <h2 class="has-text-black" id="container-title">Events</h2>
+      <div class="title-box-events">
+        <h2 class="has-text-black" id="container-title">Events</h2>
+      </div>
       <section id="events" class="events">
       </section>        
     </section>
