@@ -183,6 +183,7 @@ function openMyEvents() {
 const hotelapiKey = '5a03e81cbemsh2ea460128eebb3dp1e7199jsn58c687101fee';
 // Hotel API 
 const fetchRapidAPIResponse = async () => {
+  console.log(tempEventToAddHotel);
   const url = `https://hotels4.p.rapidapi.com/locations/v3/search?q=${city}&locale=en_US&langid=1033&siteid=300000003`;
   const options = {
   method: 'GET',
@@ -230,10 +231,10 @@ const fetchRapidAPIResponse = async () => {
 
         $('#events').append(hotelCardDiv)
         hotelCardDiv.append(saveHotelBtn, hotelNameH3, hotelLocationP) 
-        tempEventToAddHotel = eventToAddHotel;
+        // tempEventToAddHotel = eventToAddHotel;
         eventToAddHotel = '';
         localStorage.setItem("eventToAddHotel", (JSON.stringify(eventToAddHotel)));
-
+        console.log(tempEventToAddHotel);
         index++;
       } else { console.log('no hotels found');}
     }
@@ -241,12 +242,12 @@ const fetchRapidAPIResponse = async () => {
     $('.save-hotel-btn').on("click", function(event) {
     event.stopPropagation();
       if (existingEvent === true) {
-        console.log('true');
+        console.log(savedEvents[tempEventToAddHotel]);
         savedEvents[tempEventToAddHotel].hotelName = tempHotels[$(this).attr('id')].hotelName;
         savedEvents[tempEventToAddHotel].hotelLocation = tempHotels[$(this).attr('id')].hotelLocation;
         localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
-        eventToAddHotel = '';
-        localStorage.setItem("eventToAddHotel", (JSON.stringify(eventToAddHotel)));
+        // eventToAddHotel = '';
+        // localStorage.setItem("eventToAddHotel", (JSON.stringify(eventToAddHotel)));
         window.location = 'my-events.html';
       } else {
         eventInterested.hotelName = tempHotels[$(this).attr('id')].hotelName;
@@ -293,7 +294,7 @@ function displayMyEvents() {
       myEventsMediaContent.addClass('media-content');
 
       const myEventsCardName = $('<p>');
-      myEventsCardName.addClass('title is-4 has-text-white');
+      myEventsCardName.addClass('title is-4 has-text-white name');
       myEventsCardName.text(event.eventName);
 
       const myEventsLocation = $('<p>');
@@ -333,6 +334,7 @@ function findHotelForMyEvent() {
     $('#events').text('');
     city = savedEvents[eventToAddHotel].eventLocation;
     existingEvent = true;
+    tempEventToAddHotel = eventToAddHotel;
     fetchRapidAPIResponse()
     eventsContainer.innerHTML = '';  // Clear previous events
     eventsContainer.innerHTML = '<img src="Assets/images/loading-gif.gif" class="loading"></img>'

@@ -313,6 +313,11 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   opacity: 80%;
   cursor: pointer;
 }
+@media screen and (max-width: 1000px) {
+ .name {
+  font-size: 18px;
+ }
+}
 
 @media screen and (max-width: 800px) {
   #favorite-events {
