@@ -8,33 +8,15 @@
   <link rel="stylesheet" href="./Assets/css/my-events.css">
 </head>
 <body class="">
-  <nav class="navbar is-fixed-top " role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
-        <h1 class=" has-text-white">Whats poppin</h1>
-      </a>
-  
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
+  <nav id="media-nav">
+    <div class="flex">
+      <a onclick="openHomePage()">Tip Trix</a>
+      <a onclick="openHomePage()" id="home-btn">Home</a>
+      <a href="#" id="my-events-btn">My Events</a>
     </div>
-  
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <a href="#" class="navbar-item has-text-white" onclick="openHomePage()" id="home-btn">
-          Home
-        </a>
-        <a class="navbar-item has-text-white" id="my-events-btn"> 
-          My Events
-        </a>
-      </div>
-    </div>
-
-    <div class="navbar-end  search-bar">
-        <button id="search-btn" class="button margin-x">Search</button>
-        <input id="search-input" class="input" type="text" placeholder="search event...">
+    <div class="search-div">
+      <button class="button" id="search-btn">Search</button>
+      <input type="text" name="" id="search-input" class="input" placeholder="Input an event">
     </div>
   </nav>
     <section id="my-events" class="is-flex-direction-row is-flex-wrap-wrap"> 

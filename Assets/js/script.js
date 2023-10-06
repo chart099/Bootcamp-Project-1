@@ -11,7 +11,7 @@ var savedEvents = JSON.parse(localStorage.getItem("savedEvents")) || [];
 var myEventsSearchInput = JSON.parse(localStorage.getItem("myEventsSearchInput")) || '';
 var eventToAddHotel = JSON.parse(localStorage.getItem("eventToAddHotel")) || '';
 const eventsContainer = document.getElementById('events');
-var existingEvent;;
+var existingEvent;
 
 // Function to fetch events based on the artist/event name
 const fetchEvents = () => {
@@ -41,11 +41,13 @@ const openTicketmasterEventPage = (eventUrl) => {
 const displayEvents = (events) => {
   eventsContainer.innerHTML = '';  // Clear previous events
 
-  const numEventsToShow = 5;  // Number of events to display
+  const numEventsToShow = 12;  // Number of events to display
 
   if (events && events.length > 0) {
     for (let i = 0; i < Math.min(numEventsToShow, events.length); i++) {
       const event = events[i];
+    $('#container-title').text('Events');
+
 
       const eventCard = document.createElement('div');
       eventCard.classList.add('my-card', 'width-6');
@@ -60,6 +62,7 @@ const displayEvents = (events) => {
 
       const eventTitle = document.createElement('h3');
       eventTitle.textContent = event.name;
+      eventTitle.setAttribute('class', 'large')
 
       const eventLocation = document.createElement('p');
       eventLocation.textContent = event._embedded?.venues[0]?.name || 'Location not specified';
@@ -92,6 +95,7 @@ const displayEvents = (events) => {
       eventInfo.appendChild(eventLocation);
       eventInfo.appendChild(eventCity);
       eventInfo.appendChild(eventDate);
+      
 
       eventCard.appendChild(eventImage);
       eventCard.appendChild(eventInfo);
@@ -107,6 +111,7 @@ const displayEvents = (events) => {
           eventDate: event.dates.start.localDate,
           eventLocation: event._embedded?.venues[0]?.city?.name,
           eventImage: event.images[0].url,
+          eventUrl: event.url,
           hotelName: '',
           hotelLocation: '',
         }
@@ -124,14 +129,15 @@ const displayEvents = (events) => {
     savedEvents.push(tempEvents[$(this).attr('id').slice(-1)])
     localStorage.setItem("savedEvents", (JSON.stringify(savedEvents)));
     console.log($(this));
-    $(this).css('background-color', 'rgba(255, 255, 0, .85)')
+    $(this).css('background-color', 'rgba(255, 255, 0)')
     displayMyEvents()
   })
 
     displayMyEvents()
 
   // Handling see hotels button click
-  $('.see-hotels').on("click", function() {
+  $('.see-hotels').on("click", function(event) {
+    event.stopPropagation()
     city = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)].eventLocation;
     eventInterested = tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)];
     console.log(tempEvents + this + tempEvents[$(this).parent().parent().children().eq(2).attr('id').slice(-1)]);
@@ -147,6 +153,17 @@ const displayEvents = (events) => {
     window.open( url, '_blank')
  })
 
+document.getElementById('search-input').addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+    tempHotels = [];
+    tempEvents = [];
+    eventInterested = '';
+    event.stopPropagation();
+    artistName = document.querySelector('#search-input').value;
+    $('#events').text('');
+    fetchEvents();
+  }
+})
 document.querySelector('#search-btn').addEventListener('click', function (event) {
   tempHotels = [];
   tempEvents = [];
@@ -158,6 +175,7 @@ document.querySelector('#search-btn').addEventListener('click', function (event)
 });
 
 function openMyEvents() {
+  console.log('clicked');
   window.location = 'my-events.html'
 }
 
@@ -211,8 +229,10 @@ const fetchRapidAPIResponse = async () => {
 
         $('#events').append(hotelCardDiv)
         hotelCardDiv.append(saveHotelBtn, hotelNameH3, hotelLocationP) 
+        eventToAddHotel = '';
+        localStorage.setItem("eventToAddHotel", (JSON.stringify(eventToAddHotel)));
         index++;
-      }
+      } else { console.log('no hotels found');}
     }
     // Save Hotel Button sections
     $('.save-hotel-btn').on("click", function(event) {
@@ -314,6 +334,10 @@ function findHotelForMyEvent() {
     eventsContainer.innerHTML = '';  // Clear previous events
     eventsContainer.innerHTML = '<img src="Assets/images/loading-gif.gif" class="loading"></img>'
   } 
+}
+
+function openHomePage() {
+  window.location = 'index.html'
 }
 
 findHotelForMyEvent();

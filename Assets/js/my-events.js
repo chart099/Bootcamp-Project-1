@@ -8,6 +8,15 @@ document.querySelector('#search-btn').addEventListener('click', function (event)
   window.location = 'index.html';
 });
 
+document.getElementById('search-input').addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+    event.stopPropagation();
+    var searchInput = document.querySelector('#search-input').value;
+    localStorage.setItem("myEventsSearchInput", (JSON.stringify(searchInput)));
+    window.location = 'index.html';
+  }
+})
+
 // function to search through events saved in local storage and display events to the page
 function displaySavedEvents() {
   for (var i=0; i < savedEvents.length; i++) {
@@ -43,6 +52,11 @@ function displaySavedEvents() {
 
     const hotelInfoSec = $('<section>')
     hotelInfoSec.addClass('hotel-info hotel-border')
+    
+    const ticketsBtn = $('<button>')
+    ticketsBtn.addClass('tickets-button')
+    ticketsBtn.text('Get Tickets')
+
     if (event.hotelName === '') {
       console.log('no name');
       const findHotelBtn = $('<button>')
@@ -56,7 +70,7 @@ function displaySavedEvents() {
       eventInfoSec.append(eventNameH3, eventDateP, eventLocationP)
       eventCardDiv.append(hotelInfoDiv)
       hotelInfoDiv.append(hotelInfoSec)
-      hotelInfoSec.append(findHotelBtn)
+      hotelInfoSec.append(findHotelBtn, ticketsBtn)
 
     } else {
       const hotelNameH3 = $('<h3>')
@@ -72,7 +86,7 @@ function displaySavedEvents() {
       eventInfoSec.append(eventNameH3, eventDateP, eventLocationP)
       eventCardDiv.append(hotelInfoDiv)
       hotelInfoDiv.append(hotelInfoSec)
-      hotelInfoSec.append(hotelNameH3, hotelLocationP)
+      hotelInfoSec.append(hotelNameH3, hotelLocationP, ticketsBtn)
     }
   }
   $('.hotel-button').on('click', function (event) {
@@ -81,10 +95,18 @@ function displaySavedEvents() {
     localStorage.setItem("eventToAddHotel", (JSON.stringify(eventToAddHotel)));
     window.location = 'index.html';
   })
+
+  $('.tickets-button').on('click', function (event) {
+    event.stopPropagation()
+    var url = savedEvents[$(this).parent().parent().parent().attr('id')].eventUrl;
+    window.open( url, '_blank')
+  })
+
 }
 // function to take user to the homepage
 function openHomePage() {
   window.location = 'index.html'
 }
+
 // running this function when the page loads
 displaySavedEvents()
